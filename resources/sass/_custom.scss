@@ -1,0 +1,50 @@
+
+ html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  
+}
+  
+  #test{
+    background-color: yellow;
+  }
+  
+  
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height:60%;
+        width:60%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      ul {
+        list-style-type: none;
+      }
+      .input-1000 { 
+        width: 400px ;
+       }
+       .label-note{
+         font-weight:normal;
+         color:blue;
+       }
+       label {
+        font-weight: normal !important;
+    }
+    h5{
+      font-weight:bold !important;
+    }
+    .ptimg{
+      max-width: 100%;
+      height: auto;
+      width: auto\9; /* ie8 */
+    }
+    .ptimgsub{
+      max-width: 50%;
+      height: auto;
+      width: auto\9; /* ie8 */
+    }
+       
+        
+
+      
