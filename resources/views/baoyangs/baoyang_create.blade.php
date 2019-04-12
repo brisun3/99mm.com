@@ -3,35 +3,34 @@
 @section('content')
 
 <div class="container">
-  <h4 class="text-center" >pt小姐登记表</h4>
+  <h4 class="text-center" >baoyang登记表</h4>
   <div class="jumbotron">
   <h5>主要资料</h5>
   <label>国家:{{$ucountry}}</label>
   <label>  &nbsp&nbsp &nbsp 用户名:{{$uname}}</label>
-  {!!Form::open(['action' => 'PtmisssController@store', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
+  {!!Form::open(['action' => 'BaoyangsController@store', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
   
-
-  <div class="form-group form-inline ">
+  <div class="form-group form-inline">
     {{Form::label('tel', '电话 :  ')}}
-    {{Form::text('tel', '', ['class' => 'form-control ', 'placeholder' => '电话'])}}
+    {{Form::text('tel', '', ['class' => 'form-control', 'placeholder' => '电话'])}}
+  </div>
+  
+  <div class="form-group form-inline ">
+    {{Form::label('email', 'Email :  ')}}
+    {{Form::text('email', '', ['class' => 'form-control ', 'placeholder' => 'Email'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('city', '城市 :  ')}}
     {{Form::text('city', '', ['class' => 'form-control', 'placeholder' => '城市'])}}
   </div>
   
-  <div class="form-group form-inline">
-    {{Form::label('addr', '大慨位置 :  ')}}
-    {{Form::text('addr', '', ['class' => 'form-control', 'placeholder' => '如：市中心'])}}
-  </div>
-  <div class="form-group form-inline">
-    {{Form::label('venue', '是否提供场所：')}}
-    {{Form::checkbox('venue', '',null, ['class' => 'form-control,checkbox'])}}
-  </div>
- 
   <div class="form-group ">
-      {{Form::label('intro', '自我介绍 :')}}
-      {{Form::textarea('intro', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => '文字自述'])}}
+      {{Form::label('topic', '包养标题 :')}}
+      {{Form::text('topic', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => '包养标题'])}}
+  </div>
+  <div class="form-group ">
+    {{Form::label('info', '内容信息 :')}}
+    {{Form::textarea('info', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => '内容信息'])}}
   </div>
 
   <h5>个人详情</h5>
@@ -43,50 +42,34 @@
     {{Form::label('national', '来自国家或地区 :')}}
     {{Form::text('national', '', ['class' => 'form-control', 'placeholder' => '来自国家'])}}
   </div>
-  
-  
   <div class="form-group form-inline">
-    {{Form::label('lan', '语言 :')}}
-    {{Form::text('lan', '', ['class' => 'form-control', 'placeholder' => '语言'])}}
+    {{Form::label('look', '相貌 :')}}
+    {{Form::text('look', '', ['class' => 'form-control', 'placeholder' => '相貌'])}}
+  </div>
+  <div class="form-group form-inline">
+    {{Form::label('shape', '身材 :')}}
+    {{Form::text('shape', '', ['class' => 'form-control', 'placeholder' => '身材'])}}
+  </div>
+  <div class="form-group form-inline">
+    {{Form::label('height', '身高 :')}}
+    {{Form::text('height', '', ['class' => 'form-control', 'placeholder' => '身高'])}}
+  </div>
+  <div class="form-group form-inline">
+    {{Form::label('hobby', '喜好 :')}}
+    {{Form::text('hobby', '', ['class' => 'form-control', 'placeholder' => '喜好'])}}
   </div>
   
   <div class="form-group form-inline">
-    {{Form::label('lan_des', '语言说明 :')}}
-    {{Form::text('lan_des', '', ['class' => 'form-control', 'placeholder' => '语言说明'])}}
-  </div>
-  <h5>服务和价格</h5>
-  <div class="form-group form-inline">
-    {{Form::label('price', '价格 ：')}}
-    {{Form::text('price', '', ['class' => 'form-control', 'placeholder' => '价格'])}}
+    {{Form::label('price', '价格范围 ：')}}
+    {{Form::text('price', '', ['class' => 'form-control', 'placeholder' => '价格范围'])}}
   </div>
   
   <div class="form-group form-inline">
-    {{Form::label('price_out', '上门服务价格 ：')}}
-    {{Form::text('price_out', '', ['class' => 'form-control', 'placeholder' => '上门服务价格'])}}
-  </div>
-
-  <div class="form-group form-inline">
-    {{Form::label('price_note', '价格说明：')}}
-    {{Form::text('price_note', '', ['class' => 'form-control', 'placeholder' => '价格说明'])}}
+    {{Form::label('period', '计划包养时间：')}}
+    {{Form::text('period', '', ['class' => 'form-control', 'placeholder' => '计划包养时间'])}}
   </div>
   
-  <div class="form-group form-inline">
-    {{Form::label('service_des', '服务范围：')}}
-    {{Form::text('service_des', '', ['class' => 'form-control', 'placeholder' => '服务范围'])}}
-  </div>
-
-  <div class="form-group form-inline">
-    {{Form::label('serv_start', '服务开始时间：')}}
-    {{Form::text('serv_start', '', ['class' => 'form-control', 'placeholder' => '服务开始时间'])}}
-  </div>
-  <div class="form-group form-inline">
-    {{Form::label('serv_end', '服务结束时间：')}}
-    {{Form::text('serv_end', '', ['class' => 'form-control', 'placeholder' => '服务结束时间'])}}
-  </div>
-  <div class="form-group form-inline">
-    {{Form::label('msg', '隐蔽电话时留言：')}}
-    {{Form::text('msg', '', ['class' => 'form-control', 'placeholder' => '隐蔽电话时留言'])}}
-  </div>
+  
   
 
   

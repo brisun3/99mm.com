@@ -108,8 +108,12 @@ $this->ip_country=$api_result['country_name'];
             //$posts = DB::table('posts')->groupBy('city')->get();
             
             
+            }else{
+                $this->posts=0;
+                $this->city_number=0;
+
             }
-        //}
+        
         return view('pages.index')->with('posts', $this->posts)->
         with('city_num',$this->city_num)->with('ip_country', $this->ip_country);
     }

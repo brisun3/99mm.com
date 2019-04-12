@@ -62,7 +62,7 @@ class DashboardController extends Controller
             case 'massage':
                 return $a->create_mass_tbl($ucountry,$utype);
             case 'ptmiss':
-            return $a->create_ptmiss_tbl($ucountry);
+                return $a->create_ptmiss_tbl($ucountry);
             case 'baoyang':
                 
 

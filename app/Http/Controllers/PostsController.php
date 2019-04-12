@@ -59,16 +59,16 @@ class PostsController extends Controller
                     return view('misss.miss_create')->with('ucountry',$ucountry)->with('uname',$uname);
                     
                 case('massage'):
-                    return view('posts/massage_create');
+                    return view('massages/massage_create');
                 case('ptmiss'):
                     return view('ptmisss.ptmiss_create')->with('uname',$uname)
                     ->with('ucountry',$ucountry);
                 case('baoyang'):
-                    return view('posts/baoyang_create');
+                    return view('baoyangs/baoyang_create')->with('uname',$uname)->with('ucountry',$ucountry);
                 case('commercial'):
-                    return view('posts/comercial_create');
+                    return view('mores/comercial_create');
                 case('holiday'):
-                    return view('posts/holiday_create');
+                    return view('mores/holiday_create');
                 
             }
             

@@ -15,12 +15,26 @@ class CreateBaoyangsTable extends Migration
     {
         Schema::create('baoyangs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('tel');
-            $table->string('city');
-            $table->string('img');
+            $table->string('ucountry');
+            $table->string('uname');
+            $table->integer('user_id');
             $table->text('info');
-            $table->date('expire_at');
+            $table->string('tel');
+            $table->string('email');
+            $table->string('city');
+            $table->string('national');
+            $table->string('age');
+            $table->string('look');
+            $table->string('shape');
+            $table->string('price');
+            $table->string('height');
+            $table->string('hobby');
+            $table->string('period');
+            $table->string('img0');
+            $table->string('img1');
+            $table->string('img2');
+            
+            
             $table->timestamps();
         });
     }

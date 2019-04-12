@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Posts pages .index</h1>
+    
     <h2> 
 {{$ip_country}}
 
@@ -21,11 +21,7 @@
                   
                         @if($post->city==$city_name->city)
                         
-                            <?php  //convert date to dd/mm
-                                $old_date = $post->created_at;              // returns Saturday, January 30 10 02:06:34
-                                $str_date = strtotime($old_date);
-                                $createDM = date('m月d日', $str_date); 
-                            ?>
+                             
                                 <div class="col-md-4 col-sm-3">
                                     @if($post->img0)
                                         <!-- first word in link misss must be controller's fore part--> 
@@ -40,7 +36,7 @@
                                         <h3>{{$post->uname}}</h3>
                                         
                                         <small> {{$post->addr1}} </small>
-                                        <small>&nbsp&nbsp{{$createDM}}  </small>
+                                        
                                 </div>
                         @endif        
                     @endforeach
@@ -77,10 +73,4 @@
 @endsection
 
 
-<?php
-/*require 'Geo.php';
-$geo=new Geo();
-$geo->request('https://www.telize.com/');
-echo 'live in'.$geo->city;
-*/
-?>
+
