@@ -19,9 +19,10 @@ class EmailClass extends Mailable
      *
      * @return void
      */
-    public function __construct($content,$ename)
+    public function __construct($content,$topic,$ename)
     {
         $this->content=$content;
+        $this->topic=$topic;
         $this->ename=$ename;
     }
 
@@ -33,6 +34,6 @@ class EmailClass extends Mailable
     public function build()
     {
         return $this->markdown('email.'.$this->content)
-                    ->with('ename', $this->ename);
+                    ->with('ename', $this->ename)->with('topic', $this->topic);
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-    <h1 class="text-center">业余小姐列表</h1>
+    <h3 class="text-center">业余小姐列表</h3>
         <hr>
 @if(count($city_num) > 0)
     
