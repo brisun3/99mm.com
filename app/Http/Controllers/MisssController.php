@@ -10,7 +10,7 @@ use App\Miss;
 use App\Status;
 //for email
 use Mail;
-use App\Mail\EmailClass;
+use App\Mail\regEmailClass;
 
 
 class MisssController extends Controller
@@ -184,7 +184,7 @@ class MisssController extends Controller
             //email to miss
 
 
-            //Mail::to(Auth::user()->email)->send(new EmailClass('regConf.missReg',$uname));
+            Mail::to(Auth::user()->email)->send(new regEmailClass('missReg',$uname));
 
 
        //////

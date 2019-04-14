@@ -34,8 +34,9 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary" value="Send">Send</button>
             </div>
-            <a href="{{route('sendEmail')}}" class="btn btn-blockbtn-primary">send email</a>
+            
 		</form>
 	</div>
+	
  </div> <!-- /container -->
 @endsection

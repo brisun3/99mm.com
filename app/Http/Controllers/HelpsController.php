@@ -14,8 +14,8 @@ class HelpsController extends Controller
     {
         $this->middleware('auth',['except'=>['index','show']]);
     }
-    public function email(){
-        $topic='12345';
+    public function email(Request $request){
+        $topic=$request->input('message');
         
         Mail::to('highlevelstructures@gmail.com')->send(new EmailClass('contactus',$topic,auth()->user()->username));
         //Mail::to(Auth::user()->email)->send(new EmailClass('contactus',auth()->user()->username));

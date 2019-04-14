@@ -51,4 +51,6 @@ Route::get('/createTbl', 'CreateTblController@createTbl');
 //$stripe=App::;
 //dd(resolve('App\Billing\Stripe'));
 Route::get('/dook', 'TestController@doAwesome');
-Route::get('/email', 'HelpsController@email')->name('sendEmail');
+Route::post('/email', 'HelpsController@email');
+//Route::get('/email', 'HelpsController@email')->name('sendEmail');
+

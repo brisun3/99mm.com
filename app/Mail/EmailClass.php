@@ -24,6 +24,7 @@ class EmailClass extends Mailable
         $this->content=$content;
         $this->topic=$topic;
         $this->ename=$ename;
+        $this->subject('99 meimei.com');
     }
 
     /**
@@ -34,6 +35,7 @@ class EmailClass extends Mailable
     public function build()
     {
         return $this->markdown('email.'.$this->content)
+
                     ->with('ename', $this->ename)->with('topic', $this->topic);
     }
 }

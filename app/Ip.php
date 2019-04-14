@@ -27,11 +27,20 @@ class Ip{
               $ip=$_SERVER['REMOTE_ADDR'];
             }
             $jsonurl = "http://ip-api.com/json/$ip?lang=zh-CN";
-            
-            if(null!=file_get_contents($jsonurl)){
+            /////
+            $curl_handle=curl_init();
+            curl_setopt($curl_handle, CURLOPT_URL,$jsonurl);
+            curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+            curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl_handle, CURLOPT_USERAGENT, config('app.name'));
+            $query = curl_exec($curl_handle);
+            curl_close($curl_handle);
+            ///////
+            //dd(file_get_contents($jsonurl));
+            //if(!(file_get_contents($jsonurl))){
               $json = file_get_contents($jsonurl);
               $djason=json_decode($json);
-            }
+            //}
             if(isset($djason->country) && isset($djson->city)){
               $ip_location['country']=$djason->country;
               $ip_location['city']=$djason->city;

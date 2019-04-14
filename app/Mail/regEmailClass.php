@@ -7,18 +7,21 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewUserWelcome extends Mailable
+class RegEmailClass extends Mailable
 {
     use Queueable, SerializesModels;
-
+        private $mtype;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
+    public function __construct($mtype,$mname)
+    {   
+        //all mtype are:userReg,missReg,ptmissReg,massageReg,moreReg
+        $this->mtype=$mtype;
+        $this->mname=$mname;
+        $this->subject('99 meimei.com');
     }
 
     /**
@@ -27,7 +30,7 @@ class NewUserWelcome extends Mailable
      * @return $this
      */
     public function build()
-    {
-        return $this->markdown('email.user.newuserwelcome');
+    {   
+        return $this->markdown('email.user.'.$this->mtype)->with('mname',$this->mname);
     }
 }

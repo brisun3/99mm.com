@@ -1,9 +1,10 @@
 @component('mail::message')
-# Welcome for contactus
+# {{$topic}}
 
 The *body* of **your message** pls _plses dfdf_ af feedb.
 name:{{$ename}}
-topic:{{$topic}}
+
+
 @component('mail::button', ['url' => '127.0.0.4'])
 Button Text vew my dashpord
 @endcomponent
