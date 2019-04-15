@@ -18,7 +18,7 @@
 			{{ csrf_field() }} 
 			<div class="form-group form-inline">
 			<label for="Name">姓名： </label>
-			<input type="text" class="form-control" id="name" value="{{$ename}}" placeholder="{{$ename}}" name="name" required>
+			<input type="text" class="form-control" id="ename" value="{{$ename}}" placeholder="{{$ename}}" name="name" required>
 		</div>
 
 		<div class="form-group form-inline">

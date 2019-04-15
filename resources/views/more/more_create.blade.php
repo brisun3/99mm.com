@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-  <h4 class="text-center" >pt小姐登记表</h4>
+  <h4 class="text-center" >more登记表</h4>
   <div class="jumbotron">
   <h5>主要资料</h5>
   <label>国家:{{$ucountry}}</label>

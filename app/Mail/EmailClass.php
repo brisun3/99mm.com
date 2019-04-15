@@ -24,6 +24,7 @@ class EmailClass extends Mailable
         $this->content=$content;
         $this->topic=$topic;
         $this->ename=$ename;
+        //subject is built-in property of email class i presume
         $this->subject('99 meimei.com');
     }
 

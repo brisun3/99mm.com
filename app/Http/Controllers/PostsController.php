@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 //use App\Post;
 use App\Miss;
 use App\Ptmiss;
-use App\massage;
+use App\Massage;
 use App\Baoyang;
+use App\More;
 
 class PostsController extends Controller
 {
@@ -57,18 +58,21 @@ class PostsController extends Controller
             switch($user_type){
                 case('miss'):
                     return view('misss.miss_create')->with('ucountry',$ucountry)->with('uname',$uname);
-                    
+                    break;
                 case('massage'):
                     return view('massages/massage_create');
+                    break;
                 case('ptmiss'):
                     return view('ptmisss.ptmiss_create')->with('uname',$uname)
                     ->with('ucountry',$ucountry);
+                    break;
                 case('baoyang'):
                     return view('baoyangs/baoyang_create')->with('uname',$uname)->with('ucountry',$ucountry);
-                case('commercial'):
-                    return view('mores/comercial_create');
-                case('holiday'):
-                    return view('mores/holiday_create');
+                    break;
+                case('more'):
+                    return view('mores/more_create');
+                    break;
+                
                 
             }
             
@@ -110,9 +114,9 @@ class PostsController extends Controller
         switch($user_type){
             case('miss'):
                 return redirect('/miss/'.$id.'/edit');
+                break;
             case('massage'):
                 $post= Massage::find($id);
-                
                 break;
             case('ptmiss'):
                 $post= Miss::find($id);
@@ -122,13 +126,9 @@ class PostsController extends Controller
                 return redirect('/baoyangs/'.$id.'/edit');
                 
                 break;
-            case('commercial'):
+            case('more'):
+                $post= More::find($id);
                 break;
-                
-            case('holiday'):
-                break;
-                
-            
         }
        
         //$post= Post::find($id);

@@ -15,9 +15,12 @@ class HelpsController extends Controller
         $this->middleware('auth',['except'=>['index','show']]);
     }
     public function email(Request $request){
+        $subject=$request->input('subject');
         $topic=$request->input('message');
+        $from=auth()->user()->email;
+        $ename=auth()->user()->name;
         
-        Mail::to('highlevelstructures@gmail.com')->send(new EmailClass('contactus',$topic,auth()->user()->username));
+        Mail::to('chinesedriver.com@gmail.com')->send(new EmailClass('contactus',$topic,$ename));
         //Mail::to(Auth::user()->email)->send(new EmailClass('contactus',auth()->user()->username));
         return redirect('/');
 

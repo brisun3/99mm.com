@@ -3,28 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Ptmiss;
-use App\Status;
-use Mail;
-use App\Mail\EmailClass;
 
-
-class PtmisssController extends Controller
+class MoresController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
+    {
+        public function store(Request $request)
     {
         $this->validate($request, [
             'city' => 'required',
             'tel' => 'required',
-            'intro' => 'required'
+            'info' => 'required'
             //'img_name'=>'image|nullable'
             //'image|mimes:jpeg,bmp,png|size:2000'
         ]);
@@ -37,34 +52,25 @@ class PtmisssController extends Controller
             // user found
 
 
-            $ptmiss = new Ptmiss;
-            $ptmiss->user_id = auth()->user()->id;
-            //$ptmisss -> setTable(Auth::user()->ucountry.'_ptmisss_tbl');
-            $ptmiss->city = $request->input('city');
-            $ptmiss->uname = $uname;
-            $ptmiss->tel = $request->input('tel');
-            $ptmiss->addr = $request->input('addr');
-            $ptmiss->venue = $request->has('venue');
-            $ptmiss->intro = $request->input('intro');
-            $ptmiss->age = $request->input('age');
-            $ptmiss->national = $request->input('national');
-            $ptmiss->lan = $request->input('lan');
-            $ptmiss->lan_des= $request->input('lan_des');
-            $ptmiss->price = $request->input('price');
-            $ptmiss->price_out = $request->input('price_out');
-            $ptmiss->price_note= $request->input('price_note');
-            $ptmiss->service_des = $request->input('service_des');
-            $ptmiss->serv_start = $request->input('serv_start');
-            $ptmiss->serv_end = $request->input('serv_end');
-            $ptmiss->msg = $request->input('msg');
-            $ptmiss->tel_on = 1;
-            
-            
-
-
-
-
-            // Handle File Upload
+            $baoyang = new Baoyang;
+            $baoyang->user_id = auth()->user()->id;
+            //$baoyangs -> setTable(Auth::user()->ucountry.'_baoyangs_tbl');
+            $baoyang->ucountry = auth()->user()->ucountry;
+            $baoyang->city = $request->input('city');
+            $baoyang->uname = $uname;
+            $baoyang->tel = $request->input('tel');
+            $baoyang->email = $request->input('email');
+            $baoyang->info = $request->input('info');
+            $baoyang->age = $request->input('age');
+            $baoyang->national = $request->input('national');
+            $baoyang->look = $request->input('look');
+            $baoyang->shape = $request->input('shape');
+            $baoyang->height = $request->input('height');
+            $baoyang->hobby = $request->input('hobby');
+            $baoyang->price = $request->input('price');
+            $baoyang->period = $request->input('period');
+          
+            //  Handle File Upload
             $i=0;
             if($request->hasFile('filename')){
 
@@ -81,12 +87,16 @@ class PtmisssController extends Controller
                     $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
-                    $ptmiss->{$img_column}=$fileNameToStore[$i];
+                    $baoyang->{$img_column}=$fileNameToStore[$i];
                     $i++;
                 }
+            } else {
+                $fileNameToStore = 'no-user.jpg';
+                $baoyang->img0=$fileNameToStore;
             }
+
           
-            $ptmiss->save();
+            $baoyang->save();
 
 
             //store data to status tbl
@@ -99,24 +109,23 @@ class PtmisssController extends Controller
             $status->verified= 0;
 
             $status->status= 'free';
-            $status->expire_at = date('Y-m-d', strtotime(' + 2months'));
+            $status->expire_at = date('Y-m-d', strtotime(' + 4months'));
             $status->last_update=date("Y-m-d");
             $status->save();
 
 
 
-            //email to ptmisss
+            //email to baoyangs
 
 
-            Mail::to(Auth::user()->email)->send(new regEmailClass('ptmissReg',$uname));
+            //Mail::to(Auth::user()->email)->send(new EmailClass('regConf.baoyangsReg',$uname));
 
 
        
-        return redirect('/ptmiss')->with('success', '上传成功!');
+        return redirect('/baoyang')->with('success', '上传成功!');
         }else{
-            return redirect('/ptmiss')->with('error', '你的资料已上传过了!');
+            return redirect('/baoyang')->with('error', '你的资料已上传过了!');
         }
-
     }
 
     /**

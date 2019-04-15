@@ -29,12 +29,9 @@
                     <div class="col-md-3 col-sm-2">
                         @if($post->img0)
                             <div class="ptimg">
-                                <img src="/storage/img_name/{{$post->img0}}" style="height:130px; width:250px">
+                                <img src="/storage/img_name/{{$post->img0}}" style="height:130px; width:250px" atl="无图片">
                             </div>
-                        @else
-                            <div>
-                                <img src="/storage/img_name/no-user.jpg" style="height:130px; width:200px">
-                            </div>
+                        
                         @endif
                         <div class="row">
                         
@@ -71,7 +68,7 @@
                         <div class="btn-group">
                             <input type="hidden" class="msg" value={{$post->msg}}>
 
-                            <button class="btn btn-outline-primary number" data-last="{{$post->tel}}">
+                            <button class="btn btn-outline-primary number" data-last="{{$post->tel}}" data-tel_on="{{$post->tel_on}}">
                                     <span><a class="see">电话 </a></span>
                             </button>
                             
@@ -148,7 +145,8 @@
 <script>
     $('.number').click(function() {
         var tel = $(this).data('last');
-        if(tel){
+        var tel_on= $(this).data('tel_on');
+        if(tel_on){
             $(this).find('span').html( '<a href="tel:' + tel + '">' + tel + '</a>' );
         }else{
             var msg=$(this).closest('.btn-group').find('.msg').val();

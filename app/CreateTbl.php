@@ -89,7 +89,7 @@ class createTbl extends Model
                 $table->string('img0')->nullable();
                 $table->string('img1')->nullable();
                 $table->string('img2')->nullable();
-                
+                $table->boolean('tel_on');
                 $table->timestamps();
 
                 

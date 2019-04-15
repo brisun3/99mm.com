@@ -166,6 +166,20 @@ $this->ip_country=$api_result['country_name'];
         return view('pages.ptmiss')->with('posts',$this->posts)->
         with('city_num',$this->city_num)->with('ip_country',$this->ip_country);
     }
+
+    public function more(){
+        
+        $ptmiss = new Ptmiss;
+        $tbl=$this->ip_country.'_ptmiss_tbl';
+        $ptmiss -> setTable($tbl);
+        if (Schema::hasTable($tbl)){
+            $this->city_num=$ptmiss->select('city')->distinct('city')->get();
+            $this->posts = $ptmiss->orderBy('created_at','asc')->get();
+            //$baoyang =Baoyang::get();
+        }
+        return view('pages.more')->with('posts',$this->posts)->
+        with('city_num',$this->city_num)->with('ip_country',$this->ip_country);
+    }
     public function help(){
         if(Auth::check()){
             $ename=auth()->user()->username;
