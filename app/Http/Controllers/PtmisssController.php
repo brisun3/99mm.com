@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Ptmiss;
 use App\Status;
 use Mail;
-use App\Mail\EmailClass;
+use App\Mail\regEmailClass;
 
 
 class PtmisssController extends Controller
@@ -109,7 +109,7 @@ class PtmisssController extends Controller
 
 
             Mail::to(Auth::user()->email)->send(new regEmailClass('ptmissReg',$uname));
-
+            
 
        
         return redirect('/ptmiss')->with('success', '上传成功!');

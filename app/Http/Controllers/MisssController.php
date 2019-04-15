@@ -201,8 +201,7 @@ class MisssController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function email()
-    { Mail::to(Auth::user()->email)->send(new EmailClass('regConf.missReg'));}
+    
 
     public function show($user_id)
     {

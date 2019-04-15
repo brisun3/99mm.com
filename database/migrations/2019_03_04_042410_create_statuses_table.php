@@ -26,7 +26,7 @@ class CreateStatusesTable extends Migration
             $table->string('ucountry');
             $table->boolean('verified');
             $table->integer('paidamt');
-            $table->boolean('status');
+            $table->string('status');
             $table->date('effect_start');
             $table->date('expire_at');
             $table->text('note');

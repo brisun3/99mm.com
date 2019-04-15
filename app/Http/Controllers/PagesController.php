@@ -156,12 +156,19 @@ $this->ip_country=$api_result['country_name'];
     public function ptmiss(){
         
         $ptmiss = new Ptmiss;
+        $status = new Status;
         $tbl=$this->ip_country.'_ptmiss_tbl';
         $ptmiss -> setTable($tbl);
         if (Schema::hasTable($tbl)){
             $this->city_num=$ptmiss->select('city')->distinct('city')->get();
-            $this->posts = $ptmiss->orderBy('created_at','asc')->get();
-            //$baoyang =Baoyang::get();
+            $string_id=$tbl.'.user_id';
+            $this->posts = DB::table($tbl)
+            ->join('statuses', $string_id,'=','statuses.user_id')
+            ->get();
+        }else{
+            $this->posts=0;
+            $this->city_number=0;
+
         }
         return view('pages.ptmiss')->with('posts',$this->posts)->
         with('city_num',$this->city_num)->with('ip_country',$this->ip_country);

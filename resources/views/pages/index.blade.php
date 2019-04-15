@@ -20,7 +20,7 @@
                     @foreach($posts as $post)
                   
                         @if($post->city==$city_name->city)
-                        
+                            @if(($post->status)=='free'|($post->status)=='paid')
                              
                                 <div class="col-md-4 col-sm-3">
                                     @if($post->img0)
@@ -38,6 +38,7 @@
                                         <small> {{$post->addr1}} </small>
                                         
                                 </div>
+                            @endif
                         @endif        
                     @endforeach
                     </div>

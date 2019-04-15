@@ -9,7 +9,7 @@ byany
     如果你有任何问题或建议，请随时  
 
 
-    @component('mail::button', ['url' => '99meimei/help'])
+    @component('mail::button', ['url' => '127.0.0.1/help'])
     联系我们
 @endcomponent
 
