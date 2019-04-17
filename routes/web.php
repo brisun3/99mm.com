@@ -18,7 +18,7 @@ Route::get('/', 'PagesController@index');
 Route::get('/massage', 'PagesController@massage');
 Route::get('/baoyang', 'PagesController@baoyang');
 Route::get('/ptmiss', 'PagesController@ptmiss');
-Route::get('/help', 'PagesController@help');
+Route::get('/help', 'PagesController@help')->name('help');
 Route::resource('posts', 'PostsController');
 Route::resource('misss', 'MisssController');
 Route::resource('ptmisss', 'PtmisssController');
@@ -54,3 +54,11 @@ Route::get('/dook', 'TestController@doAwesome');
 Route::post('/email', 'HelpsController@email');
 //Route::get('/email', 'HelpsController@email')->name('sendEmail');
 
+
+Auth::routes();
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/help', 'PagesController@help')->name('help');
+    Route::get('/plans', 'PlansController@index')->name('plans.index');
+    Route::get('/plan/{plan}', 'PlansController@show')->name('plans.show');
+    Route::post('/subscription', 'SubscriptionsController@create')->name('subscription.create');
+});
