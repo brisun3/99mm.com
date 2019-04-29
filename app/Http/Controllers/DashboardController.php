@@ -8,6 +8,8 @@ use App\User;
 use App\Miss;
 use Auth;
 use App\CreateTbl;
+use DB;
+use App\Price;
 
 class DashboardController extends Controller
 {
@@ -32,15 +34,21 @@ class DashboardController extends Controller
         $user_id=auth()->user()->id;
         $utype=auth()->user()->utype;
         $user=User::find($user_id);
+        //get price
+ 
+        $price=DB::table('price')->where('country',auth()->user()->ucountry) 
+        ->where('name',$utype)->first();
+        
         //create a tbl with interupt a view, practical but not confirmed
         switch($utype){
             case 'miss':
-                return view('dashboard')->with('posts',$user->misss)->with('utype',$utype);
+                return view('dashboard')->with('posts',$user->misss)
+                ->with('utype',$utype)->with('price',$price);
                 
             case 'ptmiss':
-                return view('dashboard')->with('posts',$user->ptmisss);
+                return view('dashboard')->with('posts',$user->ptmisss)->with('price',$price);
             case 'massage':
-                return view('dashboard')->with('posts',$user->massages);
+                return view('dashboard')->with('posts',$user->massages)->with('price',$price);
             case 'baoyang':
                 return view('dashboard')->with('posts',$user->baoyangs);
 
@@ -53,7 +61,7 @@ class DashboardController extends Controller
         //$ucountry=Auth::user()->ucountry;
         $utype=auth()->user()->utype;
         //$utype=Auth::user()->utype;
-        $a=new createTbl();
+        $a=new CreateTbl();
         //the way of use model function
         
         switch($utype){

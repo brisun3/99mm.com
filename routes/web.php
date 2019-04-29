@@ -58,7 +58,7 @@ Route::post('/email', 'HelpsController@email');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/help', 'PagesController@help')->name('help');
-    Route::get('/plans', 'PlansController@index')->name('plans.index');
-    Route::get('/plan/{plan}', 'PlansController@show')->name('plans.show');
-    Route::post('/subscription', 'SubscriptionsController@create')->name('subscription.create');
+    Route::get('/plans', 'PlanController@index')->name('plans.index');
+    Route::get('/plans/{plan}', 'PlanController@show')->name('plans.show');
+    Route::post('/subscription', 'SubscriptionController@create')->name('subscription.create');
 });

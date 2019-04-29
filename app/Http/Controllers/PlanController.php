@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Plan;
 
-class PlansController extends Controller
+class PlanController extends Controller
 {
     public function index()
     {

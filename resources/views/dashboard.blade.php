@@ -6,13 +6,25 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">账户管理</div>
+                <div class="card-body">
+                    notice if exipred days9
+                    <a href="pay now">paynow</a>
+                    week price{{$price->week_price}}
+                    2week price{{$price->2weeks_price}}
+                    mon price{{$price->mon_price}}
+                </div>
+                <hr>
 
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
+
                     @endif
+                        
+                            <a class="nav-link" href="{{ route('plans.index') }}">{{ __('Plans') }}</a>
+                          
                         <a href="posts/create" class="btn btn-primary">创建文档</a>
                         <hr>
                         <h5>你已上传的资料</h5>
