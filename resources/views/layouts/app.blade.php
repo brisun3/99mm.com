@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    
     <!-- my Scripts -->
     
  
@@ -19,7 +20,7 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
+    <!-- Styles confict with stripe card form-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
     .modal-backdrop

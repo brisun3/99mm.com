@@ -175,7 +175,9 @@ class MisssController extends Controller
             $status->verified= 0;
 
             $status->status= 'free';
-            $status->expire_at = date('Y-m-d', strtotime(' + 2months'));
+            $expire=date('Y-m-d', strtotime(' + 2months'));
+            $status->expire_at = $expire;
+            $status->discount_to = date('Y-m-d', strtotime($expire.'+ 28days'));
             $status->last_update=date("Y-m-d");
             $status->save();
 
@@ -312,7 +314,7 @@ class MisssController extends Controller
 
             //$miss->user_id = $request->input('user_id');
             $miss->intro = $request->input('intro');
-            $miss->type = $request->type;
+            //$miss->type = $request->type;
 
             //give 2 months free using
             //$miss->expire_at = date('Y-m-d', strtotime(' + 2months'));

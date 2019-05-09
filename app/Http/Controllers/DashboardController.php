@@ -30,30 +30,41 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        
+
         $this->createTbl();
         $user_id=auth()->user()->id;
         $utype=auth()->user()->utype;
         $user=User::find($user_id);
-        //get price
+        //get user status
+        $status=DB::table('statuses')->where('user_id',$user_id) 
+        ->first();
+        //dd($status->expire_at);
+        //get price list
  
         $price=DB::table('price')->where('country',auth()->user()->ucountry) 
         ->where('name',$utype)->first();
+
+         
         
         //create a tbl with interupt a view, practical but not confirmed
         switch($utype){
             case 'miss':
                 return view('dashboard')->with('posts',$user->misss)
-                ->with('utype',$utype)->with('price',$price);
+                ->with('utype','miss')->with('price',$price)->with('status',$status);
                 
             case 'ptmiss':
-                return view('dashboard')->with('posts',$user->ptmisss)->with('price',$price);
+                return view('dashboard')->with('posts',$user->ptmisss)->with('utype','ptmiss')
+                ->with('price',$price)->with('status',$status);
             case 'massage':
-                return view('dashboard')->with('posts',$user->massages)->with('price',$price);
+                return view('dashboard')->with('posts',$user->massages)->with('utype','massage')
+                ->with('price',$price)->with('status',$status);
             case 'baoyang':
                 return view('dashboard')->with('posts',$user->baoyangs);
 
 
         }
+       
         
     }
     public function createTbl(){ 
@@ -78,6 +89,83 @@ class DashboardController extends Controller
 
 
         
+    }
+    public function pay(Request $request){
+        dd($request->all());
+    }
+    public function showcard(){
+        // Set your secret key: remember to change this to your live secret key in production
+          // See your keys here: https://dashboard.stripe.com/account/apikeys
+          \Stripe\Stripe::setApiKey("sk_test_f2eiG8tsfC8Y8CYcYNevtt3f00MXDBLS00");
+  
+          $intent = \Stripe\PaymentIntent::create([
+          'amount' => 4999,
+          'currency' => 'eur',
+          ]);
+          return view('dashboardInc.card');
+  
+    }
+    /*
+    public function charge(Request $request){
+        dd($request->input('amount'));
+
+        // Set your secret key: remember to change this to your live secret key in production
+      // See your keys here: https://dashboard.stripe.com/account/apikeys
+      \Stripe\Stripe::setApiKey("sk_test_f2eiG8tsfC8Y8CYcYNevtt3f00MXDBLS00");
+      
+      // Token is created using Checkout or Elements!
+      // Get the payment token ID submitted by the form:
+      $token = $_POST['stripeToken'];
+      $charge = \Stripe\Charge::create([
+          'amount' => $request->input('amount'),
+          'currency' => 'eur',
+          'description' => 'Example charge',
+          'source' => $token,
+      ]);
+      if($charge->captured==true)
+      return "fulfilling the purchase ....";
+      }
+      *****/
+      public function createIntent(Request $request){ 
+        // Set your secret key: remember to change this to your live secret key in production
+        // See your keys here: https://dashboard.stripe.com/account/apikeys
+        \Stripe\Stripe::setApiKey("sk_test_f2eiG8tsfC8Y8CYcYNevtt3f00MXDBLS00");
+
+        \Stripe\PaymentIntent::update(
+        'pi_1DRuHnHgsMRlo4MtwuIAUe6u',
+        [
+            'amount' => 1499,
+        ]
+        );
+    }
+
+    public function updateAmt(Request $request){ 
+        //dd($request->all());
+        
+        // Set your secret key: remember to change this to your live secret key in production
+        // See your keys here: https://dashboard.stripe.com/account/apikeys
+        \Stripe\Stripe::setApiKey("sk_test_f2eiG8tsfC8Y8CYcYNevtt3f00MXDBLS00");
+
+        \Stripe\PaymentIntent::update(
+        'pi_1DRuHnHgsMRlo4MtwuIAUe6u',
+        [
+            'amount' => $request->amt,
+        ]
+        );
+    }
+
+    public function charge(Request $request){ 
+         
+        // Set your secret key: remember to change this to your live secret key in production
+        // See your keys here: https://dashboard.stripe.com/account/apikeys
+        \Stripe\Stripe::setApiKey("sk_test_f2eiG8tsfC8Y8CYcYNevtt3f00MXDBLS00");
+
+        $intent = \Stripe\PaymentIntent::retrieve("pi_Aabcxyz01aDfoo");
+        $charges = $intent->charges->data;
+    }
+    public function ajtest(Request $request){ 
+        $data=$request->amt;
+        return $data;
     }
 }
 

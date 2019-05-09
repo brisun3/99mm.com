@@ -18,7 +18,7 @@ class CreatePriceTable extends Migration
             $table->string('country');
             $table->string('name');
             $table->integer('week_price');
-            $table->integer('2weeks_price');
+            $table->integer('dweeks_price');
             $table->integer('month_price');
             
             $table->timestamps();

@@ -27,7 +27,7 @@ class CreateStatusesTable extends Migration
             $table->boolean('verified');
             $table->integer('paidamt');
             $table->string('status');
-            $table->date('effect_start');
+            $table->date('discount_to');
             $table->date('expire_at');
             $table->text('note');
             $table->dateTime('last_update');

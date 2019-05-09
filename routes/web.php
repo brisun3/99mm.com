@@ -58,7 +58,23 @@ Route::post('/email', 'HelpsController@email');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/help', 'PagesController@help')->name('help');
+  //Route::post('/pay/{amt}', 'DashboardController@pay')->name('pay');
     Route::get('/plans', 'PlanController@index')->name('plans.index');
     Route::get('/plans/{plan}', 'PlanController@show')->name('plans.show');
     Route::post('/subscription', 'SubscriptionController@create')->name('subscription.create');
 });
+
+
+
+Route::get('/showcard', 'DashboardController@showcard');
+Route::post('/ajtest', 'DashboardController@ajtest');
+
+Route::get('/listprice/{amt}/{period}', 'PayController@listprice');
+//Route::get('/listprice2', 'PayController@listprice2');
+Route::post('/updateAmt', 'PayController@updateAmt');
+Route::post('/charge', 'PayController@charge');
+
+//Route::post('/charge2', 'PayController@charge2');
+Route::post('/webhook', 'PayController@webhook');
+Route::get('/webhook', 'PayController@webhook');
+Route::get('/webhooktest', 'PayController@webhooktest');
