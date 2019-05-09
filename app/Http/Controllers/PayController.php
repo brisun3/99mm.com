@@ -57,7 +57,7 @@ class PayController extends Controller
         //$intent = \Stripe\PaymentIntent::retrieve("pi_Aabcxyz01aDfoo");
         $charges = $intent->charges->data;
     }
-    ***/
+    
     public function charge(Request $request){ 
         \Stripe\Stripe::setApiKey("sk_test_f2eiG8tsfC8Y8CYcYNevtt3f00MXDBLS00");
 
@@ -73,7 +73,7 @@ class PayController extends Controller
 
     }
     
-    
+    ***/
     public function webhook(){ 
         // You can find your endpoint's secret in your webhook settings
         //$endpoint_secret = 'whsec_6jwreG1jAPctcRq3oAEr2uaCWMmKlWLE';

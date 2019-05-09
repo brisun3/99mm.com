@@ -30,6 +30,7 @@ Route::resource('baoyangs', 'BaoyangsController');
 
 Auth::routes();
 
+Route::get('/initprice', 'AdminController@initprice');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/gmap', function () {
      return view('gmap');
@@ -64,17 +65,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/subscription', 'SubscriptionController@create')->name('subscription.create');
 });
 
-
-
-Route::get('/showcard', 'DashboardController@showcard');
-Route::post('/ajtest', 'DashboardController@ajtest');
+//Route::get('/showcard', 'DashboardController@showcard');
 
 Route::get('/listprice/{amt}/{period}', 'PayController@listprice');
-//Route::get('/listprice2', 'PayController@listprice2');
-Route::post('/updateAmt', 'PayController@updateAmt');
-Route::post('/charge', 'PayController@charge');
 
-//Route::post('/charge2', 'PayController@charge2');
+//Route::post('/updateAmt', 'PayController@updateAmt');
+//Route::post('/charge', 'PayController@charge');
+
 Route::post('/webhook', 'PayController@webhook');
 Route::get('/webhook', 'PayController@webhook');
-Route::get('/webhooktest', 'PayController@webhooktest');
