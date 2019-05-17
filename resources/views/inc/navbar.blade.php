@@ -29,20 +29,19 @@
                 <a class="nav-link" href="/massage">按摩</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="/contract">contr包养</a>
+                  <a class="nav-link" href="/contract">签证条件婚约</a>
               </li>
-              <li class="nav-item">
-                    <a class="nav-link" href="/baoyang">包养</a>
-              </li>
+             
               
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  其它
+                  更多
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/baoyang">包养</a>
                   <a class="dropdown-item" href="/escort">伴游</a>
                   <a class="dropdown-item" href="/bussE">商务陪伴</a>
-                  <a class="dropdown-item" href="/other">other</a>
+                  
                   
                 </div>
               </li>

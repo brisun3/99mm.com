@@ -1,18 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>签证条件婚约</h1>
+    <div class="container">
+        <h5>签证条件婚约</h5>
+        <hr>
     
     
 
 @if(count($country_num) > 0)
     
 @foreach($country_num as $country_name)
-    <h2>{{$country_name->ucountry}}</h2>
+    <h5 class="text-success">{{$country_name->ucountry}}</h5>
     @if(count($posts) > 0)
-    <div class="container">
+    
         <div class="row">
         @foreach($posts as $post)
+            @if($post->ucountry===$country_name->ucountry)
                   
             <div class="col-md-3 col-sm-3">
                 @if($post->img0)
@@ -101,9 +104,10 @@
                 </div>
             </div>
             <hr>
+            @endif
         @endforeach
-    </div>
-</div>
+        </div>
+    
        
     @else
         <p>对不起，没有签证条件婚约的资料。</p>
@@ -114,7 +118,7 @@
 @else
     <p>对不起，没有签证条件婚约的资料。</p>
 @endif
-    
+    </div> 
 
 <script>
     $('.emailbtn').click(function() {
