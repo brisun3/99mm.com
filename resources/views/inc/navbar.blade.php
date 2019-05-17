@@ -29,8 +29,11 @@
                 <a class="nav-link" href="/massage">按摩</a>
               </li>
               <li class="nav-item">
+                  <a class="nav-link" href="/contract">contr包养</a>
+              </li>
+              <li class="nav-item">
                     <a class="nav-link" href="/baoyang">包养</a>
-                  </li>
+              </li>
               
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,10 +46,10 @@
                   
                 </div>
               </li>
+              
               <li class="nav-item">
-                <li class="nav-item">
-                  <a class="nav-link" href="/help">帮助</a>
-                </li>
+                <a class="nav-link" href="/help">帮助</a>
+              </li>
             </ul>
             <!-- Right Side Of Navbar -->
             <!-- Right Side Of Navbar -->

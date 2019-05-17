@@ -47,6 +47,7 @@
                                 <option value="miss">专职小姐</option>
                                 <option value="massage">按摩</option>
                                 <option value="ptmiss">业余兼职</option>
+                                <option value="contract">签证身份婚约</option>
                                 <option value="baoyang">包养</option>
                                 <option value="others">其它服务</option>
                                 

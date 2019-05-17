@@ -8,7 +8,7 @@
                 <div class="card-header">账户管理</div>
                 <div class="card-body">
                     
-                    @if(($status!=null))
+                    @if(isset($status))
                         <?php
                         $expire=$status->expire_at;
                         $discount_to=$status->discount_to;
@@ -23,7 +23,7 @@
                         @if($noteday>$expire)
                         <div id="pay">
                             @if($status->status=='free')
-                                <span>你的免费使用期将于{{$expire}}结束，此后你有一个月的折价试用期。</span>
+                                <span>你的免费使用期将于{{$expire}}结束，此后你享有一个月的优惠价。</span>
                             @else 
                             <span>你的付款将于{{$expire}}到期。</span>
                             @endif
@@ -38,7 +38,7 @@
                         <div id="pricelist" style="display:none">
                             
                             @if($discount_gap>27)
-                                <h6>折扣价格</h6>
+                                <h6>优惠价格</h6>
                                 <div>
                                     <span>付款一周：{{$price->week_price/2}}欧元</span>
                                     <span><a href="/listprice/{{$price->week_price/2}}/7days" class="btn btn-secondary ">选择</a></span>
@@ -57,7 +57,7 @@
                                 <hr>
                                 
                             @elseif($discount_gap>13)
-                                <h6>部分折扣价格</h6>
+                                <h6>部分优惠价格</h6>
                                 <div>
                                     <span>付款一周：{{$price->week_price/2}}欧元</span>
                                     <span><a href="/listprice/{{$price->week_price/2}}/7days" class="btn btn-secondary ">选择</a></span>
@@ -75,7 +75,7 @@
                                 </div>
                                 <hr>
                                 @elseif($discount_gap>3)
-                                <h6>部分折扣价格</h6>
+                                <h6>部分优惠价格</h6>
                                 <div>
                                     <span>付款一周：{{$price->week_price/2}}</span>
                                     <span><a href="/listprice/{{$price->week_price/2}}/7days" class="btn btn-secondary ">选择</a></span>
@@ -107,7 +107,7 @@
                                 <br>
                                 <div>
                                     <span>付款一个月：{{$price->month_price}}欧元</span>
-                                    <span><a  href="/listprice/{{$price->month_price}}/1month" class="btn btn-secondary  ">选择</a></span>
+                                    <span><a  href="/listprice/{{$price->month_price}}/month" class="btn btn-secondary  ">选择</a></span>
                                 </div>
                                 <hr>
                             

@@ -33,15 +33,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+/*
     public function posts(){
         return $this->hasMany('App\Post');
     }
+    ****/
     public function misss(){
         return $this->hasMany('App\Miss');
     }
     public function ptmisss(){
         return $this->hasMany('App\Ptmiss');
+    }
+    public function contracts(){
+        return $this->hasMany('App\Contract');
     }
     public function baoyangs(){
         return $this->hasMany('App\Baoyang');

@@ -18,11 +18,13 @@ Route::get('/', 'PagesController@index');
 Route::get('/massage', 'PagesController@massage');
 Route::get('/baoyang', 'PagesController@baoyang');
 Route::get('/ptmiss', 'PagesController@ptmiss');
+Route::get('/contract', 'PagesController@contract');
 Route::get('/help', 'PagesController@help')->name('help');
 Route::resource('posts', 'PostsController');
 Route::resource('misss', 'MisssController');
 Route::resource('ptmisss', 'PtmisssController');
 Route::resource('massages', 'MassageController');
+Route::resource('contracts', 'ContractsController');
 //Route::get('/baoyangs/edit', function () {
  // return view('posts.baoyang_edit');
  // });
@@ -58,7 +60,7 @@ Route::post('/email', 'HelpsController@email');
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
-  Route::get('/help', 'PagesController@help')->name('help');
+  
   //Route::post('/pay/{amt}', 'DashboardController@pay')->name('pay');
     Route::get('/plans', 'PlanController@index')->name('plans.index');
     Route::get('/plans/{plan}', 'PlanController@show')->name('plans.show');
@@ -68,9 +70,16 @@ Route::group(['middleware' => 'auth'], function() {
 //Route::get('/showcard', 'DashboardController@showcard');
 
 Route::get('/listprice/{amt}/{period}', 'PayController@listprice');
+Route::get('/customerPay/{cus_type}/{user_id}', 'PayController@customerPay');
 
 //Route::post('/updateAmt', 'PayController@updateAmt');
 //Route::post('/charge', 'PayController@charge');
 
 Route::post('/webhook', 'PayController@webhook');
 Route::get('/webhook', 'PayController@webhook');
+Route::post('/onceoff_hook', 'PayController@onceoff_hook');
+Route::get('/onceoff_hook', 'PayController@onceoff_hook');
+
+
+
+

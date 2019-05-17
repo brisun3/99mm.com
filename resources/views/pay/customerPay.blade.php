@@ -9,25 +9,17 @@
       <div class="card-header">付款页</div>
       
       <div class="card-body">
-        <?php
-        if(isset($period)){
-        switch ($period) {
-          case '7days':
-            $trans="一周";
-            break;
-          case '14days':
-            $trans="两周";
-            break;
-          case 'month':
-            $trans="一个月";
-            break;
-        }
         
           
-        }
-          
+        <?php if($cus_type=='contract'){
+          $amt=10.80;
+          echo '<p>查看该电话号码，须付'.$amt.'欧元。</p>';
+        } 
         ?>
-        <p>你选择预付{{$trans}}，共{{$amt}}欧元。</p>
+        
+        @if($cus_type=='baoyang')
+            <p>查看该电话号码，须付{{$amt}}欧元。</p>
+        @endif
         
         <hr>
         <div id="stripe_card" >
@@ -143,7 +135,7 @@
         'amount' => $amt*100,
         'currency' => 'eur',
         'payment_method_types' => ['card'],
-        'metadata' => ['user_id' => $user->id,'utype'=>$user->utype,'period'=>$period],
+        'metadata' => ['utype'=>$cus_type,'user_id'=>$user_id],
         ]);
         //echo $intent->id;
         
@@ -188,50 +180,17 @@
           //Display error.message in your UI.
         } else {
           //The payment has succeeded. Display a success message.
-          
-          window.location="/dashboard";
+          document.cookie = {{$user_id}}+"=pending;360000*48;path=/";
+          //+{{$user_id}};
+          //console.log(result);
+          setTimeout(function () {
+          window.location="/contract";
+          }, 2000);
         }
       });
     });
       
   </script>
 
-
-
-
-
-  
-  <script>
-    /* not use any more
-  $(document).ready(function() {
-    $(".show-card").click(function(e) {
-      e.preventDefault();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        var card = document.getElementById("card");
-        $.ajax({
-            type: 'POST',
-            url: '/ajtest',
-            data: {
-                amt:$(this).val()
-            },
-            dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                card.style.display = "block";
-            },
-            error: function(data) {
-                alert(data);
-            }
-        });
-    });
-    
-});
-*/
-  
-</script>
 @endsection
 

@@ -40,6 +40,7 @@ return [
         'secret' => env('STRIPE_SECRET'),
         'webhook' => [
             'secret' => env('STRIPE_WEBHOOK_SECRET'),
+            'secret2' => env('STRIPE_WEBHOOK_SECRET2'),
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],

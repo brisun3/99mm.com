@@ -11,6 +11,7 @@ use App\Status;
 use App\Miss;
 use App\Ptmiss;
 use App\Massage;
+use App\Contract;
 use App\Baoyang;
 //use App\Post;
 
@@ -139,6 +140,7 @@ $this->ip_country=$api_result['country_name'];
         
         
     }
+    
     public function baoyang(){
             $baoyang = new Baoyang;
             
@@ -172,6 +174,17 @@ $this->ip_country=$api_result['country_name'];
         }
         return view('pages.ptmiss')->with('posts',$this->posts)->
         with('city_num',$this->city_num)->with('ip_country',$this->ip_country);
+    }
+
+    public function contract(){
+        $contract = new Contract;
+        
+        $this->country_num=Contract::select('ucountry')->distinct('ucountry')->get();
+        $this->posts = Contract::orderBy('created_at','asc')->get();
+        //$baoyang =Baoyang::get();
+           
+        return view('pages.contract')->with('posts',$this->posts)
+            ->with('country_num',$this->country_num)->with('ip_country',$this->ip_country);
     }
 
     public function more(){

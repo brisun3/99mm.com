@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Miss;
+use App\Contract;
 use Auth;
 use App\CreateTbl;
 use DB;
@@ -59,6 +60,8 @@ class DashboardController extends Controller
             case 'massage':
                 return view('dashboard')->with('posts',$user->massages)->with('utype','massage')
                 ->with('price',$price)->with('status',$status);
+            case 'contract':
+                return view('dashboard')->with('posts',$user->contracts);
             case 'baoyang':
                 return view('dashboard')->with('posts',$user->baoyangs);
 
@@ -83,12 +86,13 @@ class DashboardController extends Controller
             case 'ptmiss':
                 return $a->create_ptmiss_tbl($ucountry);
             case 'baoyang':
-                
+                break;
+            default:
+            # code...
+            break;
 
         }
-
-
-        
+               
     }
     public function pay(Request $request){
         dd($request->all());

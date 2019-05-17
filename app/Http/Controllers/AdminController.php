@@ -20,10 +20,14 @@ class AdminController extends Controller
             '90','month_price'=>'170','created_at'=> now(),'updated_at'=> now()]
         ]);
 
+<<<<<<< Updated upstream
         
 
         
 
+=======
+       
+>>>>>>> Stashed changes
         return view('admin')->with('success','ireland price init');
     } 
 }

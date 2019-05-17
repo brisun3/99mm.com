@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Miss;
 use App\Ptmiss;
 use App\Massage;
+use App\Contract;
 use App\Baoyang;
 use App\More;
 
@@ -65,6 +66,9 @@ class PostsController extends Controller
                 case('ptmiss'):
                     return view('ptmisss.ptmiss_create')->with('uname',$uname)
                     ->with('ucountry',$ucountry);
+                    break;
+                case('contract'):
+                    return view('contracts/contract_create')->with('uname',$uname)->with('ucountry',$ucountry);
                     break;
                 case('baoyang'):
                     return view('baoyangs/baoyang_create')->with('uname',$uname)->with('ucountry',$ucountry);
