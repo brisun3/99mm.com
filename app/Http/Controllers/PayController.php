@@ -161,14 +161,15 @@ class PayController extends Controller
 
     public function customerPay($cus_type,$user_id)
     {
-       
+        
+        setcookie('contract_email', 'myemail', time() + 60000, "/");
         return view('pay.customerPay')->with('cus_type',$cus_type)->with('user_id',$user_id);
     }
 
     public function onceoff_hook(){ 
         // You can find your endpoint's secret in your webhook settings
-        //$endpoint_secret = 'whsec_Xr2eC20GYb6nYJM3GSyGnxCA2yESyRBQ';
-        $endpoint_secret=config('services.stripe.webhook.secret2');
+        $endpoint_secret = 'whsec_Xr2eC20GYb6nYJM3GSyGnxCA2yESyRBQ';
+        //$endpoint_secret=config('services.stripe.webhook.secret2');
 
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
@@ -196,6 +197,7 @@ class PayController extends Controller
         //if($amt==1080){
         
         session([$user_id=>'paid']);
+        
         
         //}
         //setcookie($intent->id, 'paid', time() + (86400 * 30)); 
@@ -236,5 +238,30 @@ class PayController extends Controller
        
         
     }
+    public function checkout_server(){
+        // Set your secret key: remember to change this to your live secret key in production
+        // See your keys here: https://dashboard.stripe.com/account/apikeys
+        \Stripe\Stripe::setApiKey('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
+        $session = \Stripe\Checkout\Session::create([
+        'client_reference_id'=>'contractpay',
+        'payment_method_types' => ['card'],
+        'line_items' => [[
+            'name' => 'T-shirt',
+            'description' => 'Comfortable cotton t-shirt',
+            
+            'amount' => 500,
+            'currency' => 'usd',
+            'quantity' => 1,
+        ]],
+        
+        'success_url' => 'http://127.0.0.3/card',
+        'cancel_url' => 'http://127.0.0.3/card',
+        ]);
+        //dd($session);
+
+        
+    }
+
+    
 }

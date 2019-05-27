@@ -140,7 +140,7 @@
       <p>主要服务：{{$post->service_des}}</p>
       <p>特色服务：{{$post->special_serv}}</p>
       @if($post->western_serv==0)
-          <p>该女生不对洋人服务。</p>
+          <p>该女生不接待西方人。</p>
       @endif
   </div>
       
@@ -171,33 +171,10 @@
               
                   
     <div class="container">           
-    <div id="map" style="height:333px;width:222px;overflow: visible;"></div>
+    <div id="map" style="height:333px;width:500px;overflow: visible;"></div>
+    <button id="dirBtn">navi</button>
     </div>
-  <script>
-    /*var map;
-    function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 53.345520, lng: -6.271518},
-        zoom: 15
-      });
-    
-    //
-    
-    
-    }*/
-    /*
-    function initMap() {
-    // The location of Uluru
-    var uluru = {lat: 53.345520, lng: -6.271518};
-    // The map, centered at Uluru
-    var map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 15, center: uluru});
-    // The marker, positioned at Uluru
-    var marker = new google.maps.Marker({position: uluru, map: map});
-}
-
-  */
-  </script>
+  
   
     <script>
         function initMap() {
@@ -210,6 +187,22 @@
           //document.getElementById('submit').addEventListener('click', function() {
             // geocodeAddress(geocoder, map);
           //});
+          //for directions added
+          var directionsService = new google.maps.DirectionsService;
+          var directionsDisplay = new google.maps.DirectionsRenderer;
+          directionsDisplay.setMap(map);
+          document.getElementById('dirBtn').onclick= function(){
+            navigator.geolocation.getCurrentPosition(function(position) {
+              var latit = position.coords.latitude;
+              var lngit = position.coords.longitude;
+              var myLatLng={
+                lat:latit,
+                lng:lngit
+              };
+              calculateAndDisplayRoute(directionsService, directionsDisplay,myLatLng);                            // or something similar
+          });
+          
+        };
         }
 
         function geocodeAddress(geocoder, resultsMap) {
@@ -227,6 +220,21 @@
               alert('Geocode was not successful for the following reason: ' + status);
             }
           });
+        }
+        function calculateAndDisplayRoute(directionsService, directionsDisplay,myLatLng) {
+                   
+          directionsService.route({
+            origin: myLatLng,
+            destination:  '{{$post->addr2}}',
+            travelMode: 'DRIVING'
+            }, function(response, status) {
+              if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+              } else {
+                window.alert('Directions request failed due to ' + status);
+              }
+            }
+          );
         }
       </script>
     

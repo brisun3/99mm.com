@@ -61,7 +61,7 @@ class DashboardController extends Controller
                 return view('dashboard')->with('posts',$user->massages)->with('utype','massage')
                 ->with('price',$price)->with('status',$status);
             case 'contract':
-                return view('dashboard')->with('posts',$user->contracts);
+                return view('dashboard')->with('posts',$user->contracts)->with('utype','contract');
             case 'baoyang':
                 return view('dashboard')->with('posts',$user->baoyangs);
 

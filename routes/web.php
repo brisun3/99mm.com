@@ -67,18 +67,18 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/subscription', 'SubscriptionController@create')->name('subscription.create');
 });
 
-//Route::get('/showcard', 'DashboardController@showcard');
+
 
 Route::get('/listprice/{amt}/{period}', 'PayController@listprice');
 Route::get('/customerPay/{cus_type}/{user_id}', 'PayController@customerPay');
-
-//Route::post('/updateAmt', 'PayController@updateAmt');
-//Route::post('/charge', 'PayController@charge');
 
 Route::post('/webhook', 'PayController@webhook');
 Route::get('/webhook', 'PayController@webhook');
 Route::post('/onceoff_hook', 'PayController@onceoff_hook');
 Route::get('/onceoff_hook', 'PayController@onceoff_hook');
+
+//Route::get('/checkout', 'PayController@checkout_server');
+
 
 
 

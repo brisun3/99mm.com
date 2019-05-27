@@ -180,7 +180,7 @@
           //Display error.message in your UI.
         } else {
           //The payment has succeeded. Display a success message.
-          document.cookie = {{$user_id}}+"=pending;180000;path=/";
+          document.cookie = {{$user_id}}+"=pending;180000;path=/contract";
           //+{{$user_id}};
           //console.log(result);
           setTimeout(function () {

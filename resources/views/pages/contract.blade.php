@@ -51,7 +51,14 @@
                     <?php
                     //dd($post->user_id);
                     ?>
-                    @if (session()->has($post->user_id))
+                    @if(isset($_COOKIE[$post->user_id])&&$_COOKIE[$post->user_id]=='pending')
+                        <div >
+                            电话号码:<b class="text-danger">{{$post->tel}}</b> 
+                        </div>
+                    @else
+                        <a href="/customerPay/contract/{{$post->user_id}}" class="btn btn-primary ">付款取得电话</a>
+                    @endif
+                    {{--@if (session()->has($post->user_id))
                     
                         @if(session($post->user_id)=='paid') 
                             <div class="text-danger">
@@ -60,14 +67,15 @@
                         @endif
                     @elseif(isset($_COOKIE[$post->user_id])&&$_COOKIE[$post->user_id]=='pending')
                     
-                            <br>
+                            
                             <p class="text-danger d-inline">你的付款正在处理中...</p>
                             <button class="btn btn-primary " onClick="window.location.reload();">刷新查看</button>
                         
-                       
+                        -->
                     @else
                         <a href="/customerPay/contract/{{$post->user_id}}" class="btn btn-primary ">付款取得电话</a>
                     @endif
+                    --}}
                 </div>
             </div>
 
