@@ -44,6 +44,9 @@ class User extends Authenticatable
     public function ptmisss(){
         return $this->hasMany('App\Ptmiss');
     }
+    public function massages(){
+        return $this->hasMany('App\Massage');
+    }
     public function contracts(){
         return $this->hasMany('App\Contract');
     }

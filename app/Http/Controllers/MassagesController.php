@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-//use DB;
-use App\Miss;
+use App\Massage;
 use App\Status;
 //for email
 use Mail;
 use App\Mail\regEmailClass;
 
 
-class MisssController extends Controller
+class MassagesController extends Controller
 {
     //need to confirm if constructor adopted
     public function __construct()
@@ -25,16 +24,7 @@ class MisssController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    /*
-     public function index()
-    {
-        // $posts = Post::where('status','free')->get();
-        $posts = Miss::orderBy('uname','asc')->get();
-        //$posts = Post::orderBy('name','asc')->get();
-
-        return redirect('/')->with('posts', $posts);
-    }
-    */
+    
 
     /**
      * Show the form for creating a new resource.
@@ -46,29 +36,11 @@ class MisssController extends Controller
         $user_type=Auth::user()->utype;
         $ucountry=Auth::user()->ucountry;
         $uname=Auth::user()->username;
-            switch($user_type){
-                case('miss'):
-                    return view('misss.miss_create')->with('ucountry',$ucountry)->with('uname',$uname);
-                    break;
-                case('massage'):
-                    return redirect('massages/create');
-                    break;
-                case('ptmiss'):
-                    return view('ptmisss.ptmiss_create')->with('uname',$uname)
-                    ->with('ucountry',$ucountry);
-                    break;
-                case('contract'):
-                    return view('contracts/contract_create')->with('uname',$uname)->with('ucountry',$ucountry);
-                    break;
-                case('baoyang'):
-                    return view('baoyangs/baoyang_create')->with('uname',$uname)->with('ucountry',$ucountry);
-                    break;
-                case('more'):
-                    return view('mores/more_create');
-                    break;
-                
-                
-            }
+        if($user_type=='massage'){
+            return view('massages/massage_create')->with('ucountry',$ucountry)->with('uname',$uname);
+                    
+        }
+            
     }
 
     /**
@@ -120,17 +92,19 @@ class MisssController extends Controller
 
         $status = new Status;
         $status_uname=Status::where('uname', '=', $uname)->first();
-        if ($status_uname===null) {
+        $massage = new Massage;
+        $massage_uname=Massage::where('uname', '=', $uname)->first();
+        if (($status_uname===null)|($massage_uname===null)) {
             // user found
 
-
-            $miss = new Miss;
-            //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
-            $miss->city = $request->input('city');
-            $miss->uname = $uname;
-            $miss->tel = $request->input('tel');
-            $miss->addr1 = $request->input('addr1');
-            $miss->addr2 = $request->input('addr2');
+            if($massage_uname===null){
+            
+            //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
+            $massage->city = $request->input('city');
+            $massage->uname = $uname;
+            $massage->tel = $request->input('tel');
+            $massage->addr1 = $request->input('addr1');
+            $massage->addr2 = $request->input('addr2');
 
             // Handle File Upload
             $i=0;
@@ -149,62 +123,63 @@ class MisssController extends Controller
                     $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
-                    $miss->{$img_column}=$fileNameToStore[$i];
+                    $massage->{$img_column}=$fileNameToStore[$i];
                     $i++;
                 }
             } else {
                 $fileNameToStore = 'no-user.jpg';
-                $miss->img0=$fileNameToStore;
+                $massage->img0=$fileNameToStore;
             }
 
             // Create Post
 
-            //$miss->img_name = $fileNameToStore[0];
+            //$massage->img_name = $fileNameToStore[0];
             //if($i>0)
             //need to modify, there is error if only 1 file to upload
             //$img1= $fileNameToStore[1];
 
 
-            //$miss->img1=$img1;
+            //$massage->img1=$img1;
 
 
-            //$miss->user_id = $request->input('user_id');
-            $miss->intro = $request->input('intro');
-            $miss->age = $request->input('age');
-            $miss->national = $request->input('national');
-            $miss->shape= $request->input('shape');
-            $miss->skin = $request->input('skin');
-            $miss->height = $request->input('height');
-            $miss->chest= $request->input('chest');
-            $miss->waist = $request->input('waist');
-            $miss->weight= $request->input('weight');
-            $miss->lan1 = $request->input('lan1');
-            $miss->lan2 = $request->input('lan2');
-            $miss->lan_des= $request->input('lan_des');
-            $miss->price30 = $request->input('price30');
-            $miss->price1h = $request->input('price1h');
-            $miss->price_out = $request->input('price_out');
-            $miss->price_note= $request->input('price_note');
-            $miss->service_des = $request->input('service_des');
-            $miss->special_serv = $request->input('special_serv');
-            $miss->western_serv = $request->has('western_serv');
+            //$massage->user_id = $request->input('user_id');
+            $massage->intro = $request->input('intro');
+            $massage->age = $request->input('age');
+            $massage->national = $request->input('national');
+            $massage->shape= $request->input('shape');
+            $massage->skin = $request->input('skin');
+            $massage->height = $request->input('height');
+            $massage->chest= $request->input('chest');
+            $massage->waist = $request->input('waist');
+            $massage->weight= $request->input('weight');
+            $massage->lan1 = $request->input('lan1');
+            $massage->lan2 = $request->input('lan2');
+            $massage->lan_des= $request->input('lan_des');
+            $massage->price30 = $request->input('price30');
+            $massage->price1h = $request->input('price1h');
+            $massage->price_out = $request->input('price_out');
+            $massage->price_note= $request->input('price_note');
+            $massage->service_des = $request->input('service_des');
+            $massage->special_serv = $request->input('special_serv');
+            $massage->western_serv = $request->has('western_serv');
 
 
 
            
-            //$miss->type = $request->type;
+            //$massage->type = $request->type;
 
             //give 2 months free using
-            //$miss->expire_at = date('Y-m-d', strtotime(' + 2months'));
+            //$massage->expire_at = date('Y-m-d', strtotime(' + 2months'));
             //$post->cover_image = $fileNameToStore;
-            $miss->user_id = auth()->user()->id;
+            $massage->user_id = auth()->user()->id;
 
-            $miss->save();
-
+            $massage->save();
+        }
+        if($status_uname===null){
 
             //store data to status tbl
 
-            //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
+            //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
             $status->user_id = auth()->user()->id;
             $status->uname = $uname;
             $status->utype = auth()->user()->utype;
@@ -218,18 +193,18 @@ class MisssController extends Controller
             $status->last_update=date("Y-m-d");
             $status->save();
 
+        }
+
+            //email to massage
 
 
-            //email to miss
-
-
-            Mail::to(Auth::user()->email)->send(new regEmailClass('missReg',$uname));
+            Mail::to(Auth::user()->email)->send(new regEmailClass('massageReg',$uname));
 
 
        //////
-        return redirect('/')->with('success', '上传成功！');
+        return redirect('/massage')->with('success', '上传成功！');
         }else{
-            return redirect('/')->with('error', '你的资料已经传过了！');
+            return redirect('/massage')->with('error', '你的资料已经传过了！');
         }
 
     }
@@ -244,11 +219,11 @@ class MisssController extends Controller
 
     public function show($user_id)
     {
-        $miss=new Miss;
-        $miss -> setTable('爱尔兰_miss_tbl');
-        $post= $miss->find($user_id);
+        $massage=new Massage;
+        $massage -> setTable('爱尔兰_massage_tbl');
+        $post= $massage->find($user_id);
        //$data=
-       return view('misss.miss_show')->with('post',$post);
+       return view('massages.massage_show')->with('post',$post);
     }
 
     /**
@@ -261,19 +236,19 @@ class MisssController extends Controller
     {
         $ucountry=Auth::user()->ucountry;
 
-        $miss=new Miss;
+        $massage=new Massage;
 
-        $miss -> setTable('爱尔兰_miss_tbl');
-        $missp= $miss->find($id);
-       // $miss= Miss::find($id);
-       // if(auth()->user()->id!=$miss->user_id){
-        //dd($missp->uname);
-        if(auth()->user()->id!=$missp->user_id){
+        $massage -> setTable('爱尔兰_massage_tbl');
+        $massagep= $massage->find($id);
+       // $massage= massage::find($id);
+       // if(auth()->user()->id!=$massage->user_id){
+        //dd($massagep->uname);
+        if(auth()->user()->id!=$massagep->user_id){
             //need to confirm if '/posts'
             return redirect('/')->with('error','unathorized');
         }
 
-        return view('misss.miss_edit')->with('miss',$missp)->with('ucountry',$ucountry);
+        return view('massages.massage_edit')->with('massage',$massagep)->with('ucountry',$ucountry);
 
     }
 
@@ -309,7 +284,7 @@ class MisssController extends Controller
             'price_note'=>'string|max:45|nullable',
             'service_des'=>'string|max:100|nullable',
             'special_serv'=>'string|max:100|nullable',
-            //'western_serv'=>'int:1',
+            //'western_serv'=>'boolean',
             'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
@@ -332,8 +307,8 @@ class MisssController extends Controller
             // user found
 
 
-            $miss = Miss::find($id);
-            //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
+            $massage = massage::find($id);
+            //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
             
 
             // Handle File Upload
@@ -353,44 +328,44 @@ class MisssController extends Controller
                     $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
-                    $miss->{$img_column}=$fileNameToStore[$i];
+                    $massage->{$img_column}=$fileNameToStore[$i];
                     $i++;
                 }
             }
            
 
-            $miss->city = $request->input('city');
-            //$miss->uname = $uname;
-            $miss->tel = $request->input('tel');
-            $miss->addr1 = $request->input('addr1');
-            $miss->addr2 = $request->input('addr2');
-            $miss->intro = $request->input('intro');
-            $miss->age = $request->input('age');
-            $miss->national = $request->input('national');
-            $miss->shape= $request->input('shape');
-            $miss->skin = $request->input('skin');
-            $miss->height = $request->input('height');
-            $miss->chest= $request->input('chest');
-            $miss->waist = $request->input('waist');
-            $miss->weight= $request->input('weight');
-            $miss->lan1 = $request->input('lan1');
-            $miss->lan2 = $request->input('lan2');
-            $miss->lan_des= $request->input('lan_des');
-            $miss->price30 = $request->input('price30');
-            $miss->price1h = $request->input('price1h');
-            $miss->price_out = $request->input('price_out');
-            $miss->price_note= $request->input('price_note');
-            $miss->service_des = $request->input('service_des');
-            $miss->special_serv = $request->input('special_serv');
-            $miss->western_serv = $request->has('western_serv');
-            //$miss->user_id = auth()->user()->id;
+            $massage->city = $request->input('city');
+            //$massage->uname = $uname;
+            $massage->tel = $request->input('tel');
+            $massage->addr1 = $request->input('addr1');
+            $massage->addr2 = $request->input('addr2');
+            $massage->intro = $request->input('intro');
+            $massage->age = $request->input('age');
+            $massage->national = $request->input('national');
+            $massage->shape= $request->input('shape');
+            $massage->skin = $request->input('skin');
+            $massage->height = $request->input('height');
+            $massage->chest= $request->input('chest');
+            $massage->waist = $request->input('waist');
+            $massage->weight= $request->input('weight');
+            $massage->lan1 = $request->input('lan1');
+            $massage->lan2 = $request->input('lan2');
+            $massage->lan_des= $request->input('lan_des');
+            $massage->price30 = $request->input('price30');
+            $massage->price1h = $request->input('price1h');
+            $massage->price_out = $request->input('price_out');
+            $massage->price_note= $request->input('price_note');
+            $massage->service_des = $request->input('service_des');
+            $massage->special_serv = $request->input('special_serv');
+            $massage->western_serv = $request->has('western_serv');
+            //$massage->user_id = auth()->user()->id;
 
-            $miss->save();
+            $massage->save();
 
 
             //store data to status tbl
 
-            //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
+            //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
             /*
             $status->user_id = Auth::user()->id;
             $status->uname = $uname;
@@ -398,9 +373,9 @@ class MisssController extends Controller
             $status->last_update=date("Y-m-d");
             $status->save();
             */
-        return redirect('/')->with('success', '资料修改成功！');
+        return redirect('/massage')->with('success', '资料修改成功！');
         }else{
-            return redirect('/')->with('fail', '你已上传过了！');
+            return redirect('/massage')->with('fail', '你已上传过了！');
         }
 
     }
@@ -413,11 +388,11 @@ class MisssController extends Controller
      */
     public function destroy($id)
     {
-        $post= Miss::find($id);
+        $post= massage::find($id);
         if(auth()->user()->id!=$post->user_id){
-            return redirect('/')->with('error','you are unathorized！');
+            return redirect('/massage')->with('error','you are unathorized！');
         }
         $post->delete();
-        return redirect('/')->with('success', '你的资料已成功删除！');
+        return redirect('/massage')->with('success', '你的资料已成功删除！');
     }
 }

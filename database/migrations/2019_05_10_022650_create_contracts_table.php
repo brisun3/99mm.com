@@ -24,16 +24,18 @@ class CreateContractsTable extends Migration
             $table->string('tel');
             $table->string('email');
             $table->string('visa');
-            $table->string('city');
+            $table->string('city')->nullable();
             $table->string('national');
             $table->string('gender');
             $table->string('age');
-            $table->string('mstatus');
-            $table->string('look');
-            $table->string('price');
-            $table->string('img0');
-            $table->string('img1');
-            $table->string('img2');
+            $table->string('mstatus')->nullable();
+            $table->string('look')->nullable();
+            $table->string('price')->nullable();
+            $table->string('img0')->nullable();
+            $table->string('img1')->nullable();
+            $table->string('img2')->nullable();
+            // $table->softDeletes();
+            // $table->deleted_at();
             $table->timestamps();
         });
     }

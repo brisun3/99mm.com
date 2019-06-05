@@ -121,24 +121,32 @@ $this->ip_country=$api_result['country_name'];
     ////
     public function massage(){
         $massage = new Massage;
+        $status = new Status;
+        
         $tbl=$this->ip_country.'_massage_tbl';
-        
         $massage -> setTable($tbl);
-        if (Schema::hasTable($tbl)){
-            $this->city_num=Massage::select('city')->distinct('city')->get();
+       
+            if (Schema::hasTable($tbl))
+            {
+               
+            $this->city_num=$massage->select('city')->distinct('city')->get();
             //1$city_num=Miss::select('city')->distinct('city')->get();
-            $this->posts = Massage::orderBy('created_at','asc')->get();
-            //$city_num=Post::select('city')->groupBy('city');
-            //2$posts = Miss::orderBy('created_at','asc')->get();
-            //$posts=Post::groupBy('city')->get();
-            //$posts = DB::table('posts')->groupBy('city')->get();
-        }
+            //$this->posts = $miss_display->orderBy('created_at','asc')->get();
+            $string_id=$tbl.'.user_id';
+            $this->posts = DB::table($tbl)
+            ->join('statuses', $string_id,'=','statuses.user_id')
+            
+            
+            ->get();
+            
+            }else{
+                $this->posts=0;
+                $this->city_number=0;
 
+            }
         
-            return view('pages.massage')->with('posts', $this->posts)->
-            with('city_num',$this->city_num)->with('ip_country',$this->ip_country);
-        
-        
+        return view('pages.massage')->with('posts', $this->posts)->
+        with('city_num',$this->city_num)->with('ip_country', $this->ip_country);
     }
     
     public function baoyang(){

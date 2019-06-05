@@ -14,13 +14,10 @@ class createTbl extends Model
             {
 
                 $table->increments('id');
-
                 $table->string('uname');
                 $table->integer('user_id');
                 $table->string('city');
-                    
                 $table->string('tel');
-                
                 $table->text('addr1');
                 $table->string('img0')->nullable();
                 $table->string('img1')->nullable();
@@ -33,16 +30,15 @@ class createTbl extends Model
                 $table->string('img8')->nullable();
                 $table->string('img9')->nullable();
                 $table->text('addr2')->nullable();
-
                 $table->text('intro');
-                $table->string('age');
+                $table->integer('age');
                 $table->string('national')->nullable();
                 $table->string('shape')->nullable();
                 $table->text('skin')->nullable();
-                $table->text('height')->nullable();
-                $table->string('chest')->nullable();
-                $table->string('waist')->nullable();
-                $table->string('weight')->nullable();
+                $table->decimal('height', 3, 2)->nullable();
+                $table->integer('chest')->nullable();
+                $table->integer('waist')->nullable();
+                $table->integer('weight')->nullable();
                 $table->string('lan1')->nullable();
                 $table->string('lan2')->nullable();
                 $table->string('lan_des')->nullable();
@@ -53,6 +49,8 @@ class createTbl extends Model
                 $table->text('service_des')->nullable();
                 $table->text('special_serv')->nullable();
                 $table->boolean('western_serv');
+                // $table->softDeletes();
+                // $table->deleted_at();
                 $table->timestamps();
 
             });
@@ -90,6 +88,8 @@ class createTbl extends Model
                 $table->string('img1')->nullable();
                 $table->string('img2')->nullable();
                 $table->boolean('tel_on');
+                // $table->softDeletes();
+                // $table->deleted_at();
                 $table->timestamps();
 
                 
@@ -98,19 +98,16 @@ class createTbl extends Model
         }
 
     }
-    public function create_mass_tbl($ucountry){
+    public function create_massage_tbl($ucountry){
         if (!Schema::hasTable($ucountry.'_massage_tbl')){
             Schema::create($ucountry.'_massage_tbl', function($table)
             {
 
                 $table->increments('id');
-
                 $table->string('uname');
                 $table->integer('user_id');
                 $table->string('city');
-                    
                 $table->string('tel');
-                
                 $table->text('addr1');
                 $table->string('img0')->nullable();
                 $table->string('img1')->nullable();
@@ -123,16 +120,15 @@ class createTbl extends Model
                 $table->string('img8')->nullable();
                 $table->string('img9')->nullable();
                 $table->text('addr2')->nullable();
-
                 $table->text('intro');
-                $table->string('age');
+                $table->integer('age');
                 $table->string('national')->nullable();
                 $table->string('shape')->nullable();
                 $table->text('skin')->nullable();
-                $table->text('height')->nullable();
-                $table->string('chest')->nullable();
-                $table->string('waist')->nullable();
-                $table->string('weight')->nullable();
+                $table->decimal('height', 3, 2)->nullable();
+                $table->integer('chest')->nullable();
+                $table->integer('waist')->nullable();
+                $table->integer('weight')->nullable();
                 $table->string('lan1')->nullable();
                 $table->string('lan2')->nullable();
                 $table->string('lan_des')->nullable();
@@ -143,6 +139,8 @@ class createTbl extends Model
                 $table->text('service_des')->nullable();
                 $table->text('special_serv')->nullable();
                 $table->boolean('western_serv');
+                // $table->softDeletes();
+                // $table->deleted_at();
                 $table->timestamps();
             });
         }

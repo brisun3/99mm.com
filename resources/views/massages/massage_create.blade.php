@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="container">
-  <h4 class="text-center" >专业小姐登记表</h4>
+  <h4 class="text-center" >mass登记表</h4>
   
   <h5>主要资料</h5>
   <label>国家:{{$ucountry}}</label>
   <label>  &nbsp&nbsp &nbsp 用户名:{{$uname}}</label>
-  {!!Form::open(['action' => 'MisssController@store', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
+  {!!Form::open(['action' => 'MassagesController@store', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
     <div class="form-group form-inline {{ $errors->has('city') ? 'has-error' : ''}}">
       {{Form::label('city', '城市 :  ')}}
       {{Form::text('city', '', ['class' => 'form-control', 'placeholder' => '城市'])}}

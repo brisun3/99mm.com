@@ -31,6 +31,7 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /*
     public function index()
     {
        // $posts = Post::where('status','free')->get();
@@ -40,6 +41,7 @@ class PostsController extends Controller
         return view('posts.index')->with('posts', $posts);
         
     }
+    */
 
     /**
      * Show the form for creating a new resource.

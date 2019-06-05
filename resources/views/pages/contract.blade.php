@@ -44,7 +44,7 @@
                 
                 <div class="button-group">
                     <button class="btn btn-outline-primary emailbtn" data-last="{{$post->email}}" data-email_on="1">
-                            <span><a class="seeE">查看Email地址</a></span>
+                            <span><a class="seeE">显示Email</a></span>
                     </button>
                     
   

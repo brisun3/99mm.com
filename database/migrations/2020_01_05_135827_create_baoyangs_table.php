@@ -34,7 +34,8 @@ class CreateBaoyangsTable extends Migration
             $table->string('img1');
             $table->string('img2');
             
-            
+            // $table->softDeletes();
+            // $table->deleted_at();
             $table->timestamps();
         });
     }

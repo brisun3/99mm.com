@@ -1,21 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
     
-    <h2> 
-{{$ip_country}}
-
-   </h2>
-    
-
-@if(count($city_num) > 0)
-
-    
+    <h5> {{$ip_country}}</h5>
+    @if(count($city_num) > 0)
         @foreach($city_num as $city_name)
             <h2>{{$city_name->city}}</h2>
             
             @if(count($posts) > 0)
-                <div class="container">
+                
                     <div class="row">
                     @foreach($posts as $post)
                   
@@ -42,18 +36,16 @@
                         @endif        
                     @endforeach
                     </div>
-                </div>
-       
-            @else
-                <p>No posts found</p>
+                @else
+                <p>无内容</p>
 
             @endif
 
         @endforeach
-@else
-        <p>无内容</p>
-@endif
-    
+    @else
+            <p>无内容</p>
+    @endif
+</div>
 
    
     <div id="map" style="height:30%"></div>
@@ -67,10 +59,7 @@
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi9zEbNbmidV5rNdS3kcM0gEW1oAOYelY&callback=initMap"
-    async defer></script>
-  
-
-       
+    async defer></script>      
 @endsection
 
 

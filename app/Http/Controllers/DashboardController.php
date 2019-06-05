@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Miss;
+use App\Massage;
 use App\Contract;
 use Auth;
 use App\CreateTbl;
@@ -82,7 +83,7 @@ class DashboardController extends Controller
             case 'miss':
                 return $a->create_miss_tbl($ucountry);
             case 'massage':
-                return $a->create_mass_tbl($ucountry,$utype);
+                return $a->create_massage_tbl($ucountry);
             case 'ptmiss':
                 return $a->create_ptmiss_tbl($ucountry);
             case 'baoyang':

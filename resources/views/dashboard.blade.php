@@ -125,14 +125,12 @@
                     @endif
                         
                                                     
-                        <a href="posts/create" class="btn btn-primary">创建文档</a>
+                        <a href="misss/create" class="btn btn-primary">创建文档</a>
                         <hr>
-                        <h6>你已上传的资料</h6>
+                        
                         @if(count($posts)>0)
-                        <?php
-                            if ($utype=='miss')
-                            $utype="专业小姐";
-                        ?>
+                        <h6>你已上传的资料</h6>
+                        
                         <table class="table table-striped">
                             <tr>
                                     <th></th>
@@ -146,7 +144,30 @@
                             ?>
                             <tr>
                             <td>{{$i}}</td>
-                                <td>{{$utype}}</td>
+                            
+                            @switch($utype)
+                                @case('miss')
+                                    <td>专业小姐</td>
+                                    @break
+                                @case('ptmiss')
+                                    <td>业余客串</td>
+                                    @break
+                                @case('massage')
+                                    <td>按摩</td>
+                                    @break
+                                @case('contract')
+                                    <td>签证条件婚约</td>
+                                    @break
+                                @case('more')
+                                    <td>更多</td>
+                                    @break
+                                @case('baoyang')
+                                    <td>包养</td>
+                                    @break
+                                
+                                    
+                            @endswitch
+                                
                                 <td>{{$post->created_at}}</td>
                                 <td><a class="btn btn-primary" href="/misss/{{$post->id}}/edit">修改</a></td>
                                 <td>{!!Form::open(['action' => ['MisssController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
@@ -159,7 +180,7 @@
 
                         </table>
                         @else
-                        you have no post
+                        <p>你没有上传的资料。</p>
                         @endif
                     
                 </div>

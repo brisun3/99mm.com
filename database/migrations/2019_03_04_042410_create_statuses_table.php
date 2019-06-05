@@ -20,7 +20,7 @@ class CreateStatusesTable extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             
             $table->bigIncrements('sid');
-            $table->integer('user_id');
+            $table->integer('user_id')->unique();
             $table->string('uname');
             $table->string('utype');
             $table->string('ucountry');

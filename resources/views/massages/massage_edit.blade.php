@@ -3,28 +3,28 @@
 @section('content')
 
 <div class="container">
-  <h4 class="text-center" >专业小姐修改表</h4>
+  <h4 class="text-center" >按摩资料修改表</h4>
   <div class="jumbotron">
   <h5>主要资料</h5>
   <label>国家:{{$ucountry}}</label>
-  <label>  &nbsp&nbsp &nbsp 用户名:{{$miss->uname}}</label>
-  {!!Form::open(['action' => ['MisssController@update',$miss->id], 'method'=>'post','enctype'=>'multipart/form-data']) !!}
+  <label>  &nbsp&nbsp &nbsp 用户名:{{$massage->uname}}</label>
+  {!!Form::open(['action' => ['MassagesController@update',$massage->id], 'method'=>'post','enctype'=>'multipart/form-data']) !!}
     
   <div class="form-group form-inline">
     {{Form::label('city', '城市 :  ')}}
-    {{Form::text('city', $miss->city, ['class' => 'form-control', 'placeholder' => '城市'])}}
+    {{Form::text('city', $massage->city, ['class' => 'form-control', 'placeholder' => '城市'])}}
   </div>
   <div class="form-group form-inline ">
       {{Form::label('tel', '电话 :  ')}}
-      {{Form::text('tel',$miss->tel, ['class' => 'form-control ', 'placeholder' => '电话'])}}
+      {{Form::text('tel',$massage->tel, ['class' => 'form-control ', 'placeholder' => '电话'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('addr1', '大慨位置 :  ')}}
-    {{Form::text('addr1', $miss->addr1, ['class' => 'form-control', 'placeholder' => '如：七区，Smithfield。'])}}
+    {{Form::text('addr1', $massage->addr1, ['class' => 'form-control', 'placeholder' => '如：七区，Smithfield。'])}}
   </div>
   <div class="form-group form-inline ">
     {{Form::label('addr2', '详细地址 :  ')}}
-    {{Form::text('addr2', $miss->addr2, ['class' => 'form-control', 'class' => 'input-1000', 'placeholder' => '地址'])}}
+    {{Form::text('addr2', $massage->addr2, ['class' => 'form-control', 'class' => 'input-1000', 'placeholder' => '地址'])}}
     
     <input id="show_marker" type="button" class="btn btn-primary" value="在地图中查看位置是否正确">
     <label class="label-note">注：本地址用于在地图上标出，以方便顾客查找。因此要实际存在地址，可误差20-30米，地址文字不在网页上显示.</label>
@@ -34,89 +34,89 @@
   
   <div class="form-group ">
       {{Form::label('intro', '自我介绍 :')}}
-      {{Form::textarea('intro', $miss->intro, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => '文字自述'])}}
+      {{Form::textarea('intro', $massage->intro, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => '文字自述'])}}
   </div>
   	
   <h5>个人详情</h5>
   <div class="form-group form-inline">
     {{Form::label('age', '年龄 :')}}
-    {{Form::number('age', $miss->age, ['class' => 'form-control', 'min' => '18','max' => '99','placeholder' => '年龄'])}}
+    {{Form::number('age', $massage->age, ['class' => 'form-control', 'min' => '18','max' => '99','placeholder' => '年龄'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('national', '来自国家或地区 :')}}
-    {{Form::text('national', $miss->national, ['class' => 'form-control', 'placeholder' => '来自国家'])}}
+    {{Form::text('national', $massage->national, ['class' => 'form-control', 'placeholder' => '来自国家'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('shape', '身材型 :')}}
-    {{Form::text('shape', $miss->shape, ['class' => 'form-control', 'placeholder' => '如：苗条，丰满，匀称'])}}
+    {{Form::text('shape', $massage->shape, ['class' => 'form-control', 'placeholder' => '如：苗条，丰满，匀称'])}}
   </div>
   
   <div class="form-group form-inline">
     {{Form::label('skin', '皮肤 :')}}
-    {{Form::text('skin', $miss->skin, ['class' => 'form-control', 'placeholder' => '皮肤'])}}
+    {{Form::text('skin', $massage->skin, ['class' => 'form-control', 'placeholder' => '皮肤'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('height', '身高 :  ')}}
-    {{Form::number('height', $miss->height, ['class' => 'form-control', 'min' => '0.01','step=0.01','placeholder' => '身高,m'])}}
+    {{Form::number('height', $massage->height, ['class' => 'form-control', 'min' => '0.01','step=0.01','placeholder' => '身高,m'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('chest', '胸围 :')}}
-    {{Form::number('chest', $miss->chest, ['class' => 'form-control','min' => '1', 'step'=>'0.01','placeholder' => '胸围,cm'])}}
+    {{Form::number('chest', $massage->chest, ['class' => 'form-control','min' => '1', 'step'=>'0.01','placeholder' => '胸围,cm'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('waist', '腰围 :')}}
-    {{Form::number('waist', $miss->waist, ['class' => 'form-control', 'min' => '1','placeholder' => '腰围,cm'])}}
+    {{Form::number('waist', $massage->waist, ['class' => 'form-control', 'min' => '1','placeholder' => '腰围,cm'])}}
   </div>
   
   <div class="form-group form-inline">
     {{Form::label('weight', '体重 :')}}
-    {{Form::number('weight', $miss->weight, ['class' => 'form-control', 'min' => '1','placeholder' => '体重,kg'])}}
+    {{Form::number('weight', $massage->weight, ['class' => 'form-control', 'min' => '1','placeholder' => '体重,kg'])}}
   </div>
   <h5>语言沟通</h5>
   <div class="form-group form-inline">
     {{Form::label('lan1', '第一语言 :')}}
-    {{Form::text('lan1', $miss->lan1, ['class' => 'form-control', 'placeholder' => '第一语言'])}}
+    {{Form::text('lan1', $massage->lan1, ['class' => 'form-control', 'placeholder' => '第一语言'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('lan2', '其它语言或方言 :')}}
-    {{Form::text('lan2', $miss->lan2, ['class' => 'form-control', 'placeholder' => '其它语言'])}}
+    {{Form::text('lan2', $massage->lan2, ['class' => 'form-control', 'placeholder' => '其它语言'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('lan_des', '语言说明 :')}}
-    {{Form::text('lan_des', $miss->lan_des, ['class' => 'form-control', 'placeholder' => '语言说明'])}}
+    {{Form::text('lan_des', $massage->lan_des, ['class' => 'form-control', 'placeholder' => '语言说明'])}}
   </div>
   
   <h5>价格</h5>
   <div class="form-group form-inline">
     {{Form::label('price30', '30分钟价格 ：')}}
-    {{Form::number('price30', $miss->price30, ['class' => 'form-control','min'=>'1', 'placeholder' => '30分钟价格'])}}
+    {{Form::number('price30', $massage->price30, ['class' => 'form-control','min'=>'1', 'placeholder' => '30分钟价格'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('price1h', '1小时价格 ：')}}
-    {{Form::number('price1h', $miss->price1h, ['class' => 'form-control','min'=>'1', 'placeholder' => '1小时价格'])}}
+    {{Form::number('price1h', $massage->price1h, ['class' => 'form-control','min'=>'1', 'placeholder' => '1小时价格'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('price_out', '上门服务价格 ：')}}
-    {{Form::number('price_out', $miss->price_out, ['class' => 'form-control','min'=>'1', 'placeholder' => '上门服务价格'])}}
+    {{Form::number('price_out', $massage->price_out, ['class' => 'form-control','min'=>'1', 'placeholder' => '上门服务价格'])}}
   </div>
   
   <div class="form-group form-inline">
     {{Form::label('price_note', '价格说明：')}}
-    {{Form::text('price_note', $miss->price_note, ['class' => 'form-control', 'placeholder' => '价格说明'])}}
+    {{Form::text('price_note', $massage->price_note, ['class' => 'form-control', 'placeholder' => '价格说明'])}}
   </div>
   <h5>服务内容</h5>
   <div class="form-group form-inline">
     {{Form::label('service_des', '主要服务：')}}
-    {{Form::text('service_des', $miss->service_des, ['class' => 'form-control', 'placeholder' => '主要服务'])}}
+    {{Form::text('service_des', $massage->service_des, ['class' => 'form-control', 'placeholder' => '主要服务'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('special_serv', '特色服务：')}}
-    {{Form::text('special_serv', $miss->special_serv, ['class' => 'form-control', 'placeholder' => '特色服务'])}}
+    {{Form::text('special_serv', $massage->special_serv, ['class' => 'form-control', 'placeholder' => '特色服务'])}}
   </div>
   
   <div class="form-group form-inline">
     {{Form::label('western_serv', '是否接待洋人：')}}
-    {{Form::checkbox('western_serv', '',$miss->western_serv, ['class' => 'form-control,checkbox'])}}
+    {{Form::checkbox('western_serv', '',$massage->western_serv, ['class' => 'form-control,checkbox'])}}
   </div>
   
  
@@ -168,7 +168,7 @@
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
-      center: '{{$miss->addr2}}'
+      center: '{{$massage->addr2}}'
     });
     var geocoder = new google.maps.Geocoder();
 

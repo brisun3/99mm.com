@@ -33,8 +33,8 @@ class MoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        public function store(Request $request)
+    
+        
     {
         $this->validate($request, [
             'city' => 'required',

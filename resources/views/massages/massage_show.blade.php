@@ -151,8 +151,8 @@
     <hr>
     @if(!Auth::guest())
         @if(Auth::user()->id==$post->user_id)
-            <a href="/misss/{{$post->id}}/edit" class="btn btn-primary">修改</a>
-            {!!Form::open(['action' => ['MisssController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
+            <a href="/massages/{{$post->id}}/edit" class="btn btn-primary">修改</a>
+            {!!Form::open(['action' => ['MassagesController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
             {{Form::hidden('_method', 'DELETE')}}
             {{Form::submit('删除', ['class' => 'btn btn-danger'])}}
             {!!Form::close()!!}

@@ -20,10 +20,10 @@ Route::get('/baoyang', 'PagesController@baoyang');
 Route::get('/ptmiss', 'PagesController@ptmiss');
 Route::get('/contract', 'PagesController@contract');
 Route::get('/help', 'PagesController@help')->name('help');
-Route::resource('posts', 'PostsController');
+//Route::resource('posts', 'PostsController');
 Route::resource('misss', 'MisssController');
 Route::resource('ptmisss', 'PtmisssController');
-Route::resource('massages', 'MassageController');
+Route::resource('massages', 'MassagesController');
 Route::resource('contracts', 'ContractsController');
 //Route::get('/baoyangs/edit', function () {
  // return view('posts.baoyang_edit');

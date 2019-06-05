@@ -34,6 +34,8 @@ class CreateMoresTable extends Migration
             $table->string('img0');
             $table->string('img1');
             $table->string('img2');
+            // $table->softDeletes();
+            // $table->deleted_at();
             $table->timestamps();
         });
     }

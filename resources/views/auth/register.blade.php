@@ -29,7 +29,7 @@
                             <label for="ucountry" class="col-md-4 col-form-label text-md-right">{{ __('所在国家') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ucountry" type="text" class="form-control{{ $errors->has('ucountry') ? ' is-invalid' : '' }}" name="ucountry" value="{{ old('ucountry') }}" required autofocus>
+                                <input id="ucountry" type="text" class="form-control{{ $errors->has('ucountry') ? ' is-invalid' : '' }}" name="ucountry" value="{{ old('ucountry')?old('ucountry'):app('shared')->get('ipCountry') }}" required autofocus>
 
                                 @if ($errors->has('ucountry'))
                                     <span class="invalid-feedback" role="alert">

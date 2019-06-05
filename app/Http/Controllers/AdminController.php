@@ -19,15 +19,7 @@ class AdminController extends Controller
             ['country' => '爱尔兰', 'name'=>'massage','week_price'=>'50','dweeks_price'=>
             '90','month_price'=>'170','created_at'=> now(),'updated_at'=> now()]
         ]);
-
-<<<<<<< Updated upstream
-        
-
-        
-
-=======
-       
->>>>>>> Stashed changes
+ 
         return view('admin')->with('success','ireland price init');
     } 
 }
