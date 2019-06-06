@@ -14,8 +14,7 @@
     {{Form::label('tel', '电话 :  ')}}
     {{Form::text('tel', '', ['class' => 'form-control', 'placeholder' => '电话'])}}
   </div>
-  
-  
+    
   <div class="form-group form-inline ">
     {{Form::label('visa', ' 现有签证或身份:  ')}}
     {{Form::text('visa', '', ['class' => 'form-control ', 'placeholder' => '现有签证或身份'])}}
@@ -55,12 +54,12 @@
     {{Form::label('mstatus', '婚姻状况 :')}}
     {{Form::text('mstatus', '', ['class' => 'form-control', 'placeholder' => '婚姻状况'])}}
   </div>
+  <div class="form-group form-inline {{ $errors->has('age') ? 'has-error' : ''}}">
+      {{Form::label('age', '年龄 :')}}
+      {{Form::number('age', '', ['class' => 'form-control', 'min' => '18','placeholder' => '年龄'])}}
+    </div>
 
-
-  <div class="form-group form-inline">
-    {{Form::label('age', '年龄 :')}}
-    {{Form::text('age', '', ['class' => 'form-control', 'placeholder' => '年龄'])}}
-  </div>
+  
 
   <div class="form-group form-inline">
     {{Form::label('look', '相貌 :')}}

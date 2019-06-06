@@ -138,7 +138,7 @@
         </div>
       </div>
       {{Form::hidden('_method','PUT')}}
-      <button type="submit" class="btn btn-primary" style="margin-top:10px">登记</button>
+      <button type="submit" class="btn btn-primary" style="margin-top:10px">提交</button>
 
       {!! Form::close() !!}     
   </div> 

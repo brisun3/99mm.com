@@ -29,7 +29,7 @@
                 <a class="nav-link" href="/massage">按摩</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="/contract">签证条件婚约</a>
+                  <a class="nav-link" href="/contract">移民婚约</a>
               </li>
              
               

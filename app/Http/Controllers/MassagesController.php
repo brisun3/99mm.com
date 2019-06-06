@@ -74,7 +74,7 @@ class MassagesController extends Controller
             'price_note'=>'string|max:45|nullable',
             'service_des'=>'string|max:100|nullable',
             'special_serv'=>'string|max:100|nullable',
-            //'western_serv'=>'boolean',
+            'western_serv'=>'in:1|nullable',
             'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
@@ -94,10 +94,10 @@ class MassagesController extends Controller
         $status_uname=Status::where('uname', '=', $uname)->first();
         $massage = new Massage;
         $massage_uname=Massage::where('uname', '=', $uname)->first();
-        if (($status_uname===null)|($massage_uname===null)) {
+        
             // user found
 
-            if($massage_uname===null){
+        if($massage_uname===null){
             
             //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
             $massage->city = $request->input('city');
@@ -174,26 +174,26 @@ class MassagesController extends Controller
             $massage->user_id = auth()->user()->id;
 
             $massage->save();
-        }
-        if($status_uname===null){
+        
+            if($status_uname===null){
 
-            //store data to status tbl
+                //store data to status tbl
 
-            //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
-            $status->user_id = auth()->user()->id;
-            $status->uname = $uname;
-            $status->utype = auth()->user()->utype;
-            $status->ucountry = auth()->user()->ucountry;
-            $status->verified= 0;
+                //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
+                $status->user_id = auth()->user()->id;
+                $status->uname = $uname;
+                $status->utype = auth()->user()->utype;
+                $status->ucountry = auth()->user()->ucountry;
+                $status->verified= 0;
 
-            $status->status= 'free';
-            $expire=date('Y-m-d', strtotime(' + 2months'));
-            $status->expire_at = $expire;
-            $status->discount_to = date('Y-m-d', strtotime($expire.'+ 28days'));
-            $status->last_update=date("Y-m-d");
-            $status->save();
+                $status->status= 'free';
+                $expire=date('Y-m-d', strtotime(' + 2months'));
+                $status->expire_at = $expire;
+                $status->discount_to = date('Y-m-d', strtotime($expire.'+ 28days'));
+                $status->last_update=date("Y-m-d");
+                $status->save();
 
-        }
+            }
 
             //email to massage
 
@@ -204,7 +204,7 @@ class MassagesController extends Controller
        //////
         return redirect('/massage')->with('success', '上传成功！');
         }else{
-            return redirect('/massage')->with('error', '你的资料已经传过了！');
+            return redirect('/massage')->with('error', '你的资料已经传过了,你可以在账户管理中进行修改。');
         }
 
     }
@@ -277,14 +277,14 @@ class MassagesController extends Controller
             'weight'=>'numeric|max:300|nullable',
             'lan1'=>'string|max:15|nullable',
             'lan2'=>'string|max:15|nullable',
-            'lan_des'=>'string|max:45|nullable',
+            'lan_des'=>'string|max:60|nullable',
             'price30'=>'numeric|max:99999|nullable',
             'price1h'=>'numeric|max:99999|nullable',
             'price_out'=>'numeric|max:9999999|nullable',
             'price_note'=>'string|max:45|nullable',
             'service_des'=>'string|max:100|nullable',
             'special_serv'=>'string|max:100|nullable',
-            //'western_serv'=>'boolean',
+            'western_serv'=>'in:1|nullable',
             'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',

@@ -36,7 +36,6 @@ class PtmisssController extends Controller
         if ($status_uname===null) {
             // user found
 
-
             $ptmiss = new Ptmiss;
             $ptmiss->user_id = auth()->user()->id;
             //$ptmisss -> setTable(Auth::user()->ucountry.'_ptmisss_tbl');
@@ -58,12 +57,7 @@ class PtmisssController extends Controller
             $ptmiss->serv_end = $request->input('serv_end');
             $ptmiss->msg = $request->input('msg');
             $ptmiss->tel_on = 1;
-            
-            
-
-
-
-
+          
             // Handle File Upload
             $i=0;
             if($request->hasFile('filename')){
@@ -88,10 +82,8 @@ class PtmisssController extends Controller
           
             $ptmiss->save();
 
-
             //store data to status tbl
-
-            
+ 
             $status->user_id = auth()->user()->id;
             $status->uname = $uname;
             $status->utype = auth()->user()->utype;
@@ -103,15 +95,10 @@ class PtmisssController extends Controller
             $status->last_update=date("Y-m-d");
             $status->save();
 
-
-
             //email to ptmisss
 
-
             Mail::to(Auth::user()->email)->send(new regEmailClass('ptmissReg',$uname));
-            
-
-       
+         
         return redirect('/ptmiss')->with('success', '上传成功!');
         }else{
             return redirect('/ptmiss')->with('error', '你的资料已上传过了!');

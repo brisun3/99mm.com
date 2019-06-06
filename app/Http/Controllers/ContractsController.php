@@ -38,10 +38,20 @@ class ContractsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'visa' => 'required',
-            'tel' => 'required',
-            'gender' => 'required',
-            'info' => 'required'
+            'visa' => 'required|string|max:12',
+            'tel' => 'required|string|max:40',
+            'gender' => 'required|string|max:8',
+            'info' => 'required|string|max:800',
+            'topic'=>'required|string|max:50',
+            'city'=>'string|max:20|nullable',
+            'national'=>'required|string|max:20',
+            'age'=>'required|integer|max:99',
+            'mstatus'=>'required|string|max:8',
+            'look'=>'string|max:20|nullable',
+            'price'=>'required|string|max:30|nullable',
+            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
             //'img_name'=>'image|nullable'
             //'image|mimes:jpeg,bmp,png|size:2000'
         ]);
@@ -50,11 +60,11 @@ class ContractsController extends Controller
 
         $status = new Status;
         $status_uname=Status::where('uname', '=', $uname)->first();
-        if ($status_uname===null) {
+        $contract = new Contract;
+        $contract_uname=Contract::where('uname', '=', $uname)->first();
+        if ($contract_uname===null) {
             // user found
 
-
-            $contract = new Contract;
             $contract->user_id = auth()->user()->id;
             //$contracts -> setTable(Auth::user()->ucountry.'_contracts_tbl');
             $contract->ucountry = auth()->user()->ucountry;
@@ -96,10 +106,18 @@ class ContractsController extends Controller
             }
           
             $contract->save();
-
-            $status->verified="pending";
-            $status->save();
-
+            if ($status_uname===null) {
+                $status->user_id = auth()->user()->id;
+                $status->uname = $uname;
+                $status->utype = auth()->user()->utype;
+                $status->ucountry = auth()->user()->ucountry;
+                $status->verified= 0;
+                $status->status= 'free';
+                $status->expire_at = date('Y-m-d', strtotime(' + 12months'));
+                $status->last_update=date("Y-m-d");
+                $status->verified="pending";
+                $status->save();
+            }
             //email to contracts
 
             //Mail::to(Auth::user()->email)->send(new regEmailClass('contractReg',$uname));

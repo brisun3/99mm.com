@@ -12,7 +12,7 @@
         
           
         <?php if($cus_type=='contract'){
-          $amt=10.80;
+          $amt=12;
           echo '<p>查看该电话号码，须付'.$amt.'欧元。</p>';
         } 
         ?>

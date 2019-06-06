@@ -16,28 +16,39 @@
         <div class="row">
         @foreach($posts as $post)
             @if($post->ucountry===$country_name->ucountry)
-                  
-            <div class="col-md-3 col-sm-3">
-                @if($post->img0)
-                
-                    <img src="/storage/img_name/{{$post->img0}}" style="height:130px; width:200px">
-                
-                    @else
+                            
+                <div class="col-md-3 col-sm-3">
+                        <hr>
+                    @if($post->img0)
+                        <div class="">
+                            <img src="/storage/img_name/{{$post->img0}}" style="height:150px; width:240px" atl="无图片">
+                        </div>
                     
-                        <img src="/storage/img_name/no-user.jpg" style="height:130px; width:200px">
+                    @endif
+                    <div class="row">
                     
-                        @endif
-                    <h3>{{$post->uname}}</h3>
-            </div>
+                    @if(($post->img1)&&($post->img2))
+                        <div class="col-md-6 col-sm-6">
+                            
+                            <img src="/storage/img_name/{{$post->img1}}" style=" height:70px; width:100px">
+                            
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                        
+                            <img src="/storage/img_name/{{$post->img2}}" style=" height:70px; width:100px">
+                            
+                        </div>
+                    @endif
+                    </div>
+                    <h3 class="text-center font-weight-bold">{{$post->uname}}</h3>
+                    
+                </div>
 
             <div class="col-md-6 col-sm-6">
-                        
-                <h5>
-                        {{$post->topic}}
-                </h5>
-                            
-                            
-                
+                <hr>      
+                <h5>{{$post->topic}}</h5>
+              
                 <p class="">
                         {{$post->info}}
                 </p>
@@ -47,10 +58,6 @@
                             <span><a class="seeE">显示Email</a></span>
                     </button>
                     
-  
-                    <?php
-                    //dd($post->user_id);
-                    ?>
                     @if(isset($_COOKIE[$post->user_id])&&$_COOKIE[$post->user_id]=='pending')
                         <div >
                             电话号码:<b class="text-danger">{{$post->tel}}</b> 
@@ -80,48 +87,44 @@
             </div>
 
             <div class="col-md-3 col-sm-">
+                <hr>
                 <div>
-                        <ul>
-                                
-                                <li>居住国家:{{$post->ucountry}}</li>
-                            @if($post->city)
-                                <li>现住城市:{{$post->city}}</li>
-                            @endif
-                                <li>性别:{{$post->gender}}</li>
+                    <ul>
                             
-                            @if($post->age)
-                                <li>年龄:{{$post->age}}</li>
-                            @endif
-                            
-                            @if($post->look)
-                                <li>外貌:{{$post->look}}</li>
-                            @endif
-                            @if($post->visa)
-                                <li>现有身份或签证:{{$post->visa}}</li>
-                            @endif
-                            @if($post->mstatus)
-                                <li>婚姻状况:{{$post->mstatus}}</li>
-                            @endif
-                            @if($post->national)
-                                <li>原国籍:{{$post->national}}</li>
-                            @endif
-                            
-                        </ul>
+                            <li>居住国家:{{$post->ucountry}}</li>
+                        @if($post->city)
+                            <li>现住城市:{{$post->city}}</li>
+                        @endif
+                            <li>性别:{{$post->gender}}</li>
                         
-                        <small>&nbsp&nbsp刷新日期：{{$post->updated_at}}  </small>
+                        @if($post->age)
+                            <li>年龄:{{$post->age}}</li>
+                        @endif
+                        
+                        @if($post->look)
+                            <li>相貌:{{$post->look}}</li>
+                        @endif
+                        @if($post->visa)
+                            <li>现有身份或签证:{{$post->visa}}</li>
+                        @endif
+                        @if($post->mstatus)
+                            <li>婚姻状况:{{$post->mstatus}}</li>
+                        @endif
+                        @if($post->national)
+                            <li>原国籍:{{$post->national}}</li>
+                        @endif
+                        
+                    </ul>
+                        
+                    <small>&nbsp&nbsp刷新日期：{{$post->updated_at}}  </small>
                 </div>
             </div>
-            <hr>
             @endif
         @endforeach
         </div>
-    
-       
     @else
         <p>对不起，没有签证条件婚约的资料。</p>
-
     @endif
-
 @endforeach
 @else
     <p>对不起，没有签证条件婚约的资料。</p>
@@ -134,13 +137,9 @@
         var email_on= $(this).data('email_on');
         if(email_on){
             $(this).find('span').html( '<a href="emailto:' + email + '">' + email + '</a>' );
-        }
-           
-        
+        }        
     });
 </script>   
-    
-    
     
 @endsection
 
