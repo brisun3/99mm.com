@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Baoyang;
+use App\Escorth;
 use App\Status;
 use Mail;
 use App\Mail\EmailClass;
 
-
-class BaoyangsController extends Controller
+class EscorthsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,7 +45,7 @@ class BaoyangsController extends Controller
         $this->validate($request, [
             'city' => 'required|string|max:30',
             'tel' => 'required|string|max:40',
-            'topic' => 'required|string|max:60',
+            
             'info' => 'required|string|max:700',
             'age'=>'required|numeric|max:99',
             'national'=>'string|max:15|nullable',
@@ -55,7 +54,7 @@ class BaoyangsController extends Controller
             'height'=>'numeric|max:5|nullable',
             'hobby'=>'string|max:25|nullable',
             'price'=>'string|max:15|nullable',
-            'period'=>'string|max:8|nullable',
+            
             'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
@@ -64,31 +63,25 @@ class BaoyangsController extends Controller
 
         $uname=auth()->user()->username;
 
-        $status = new Status;
-        $status_uname=Status::where('uname', '=', $uname)->first();
-        
-            // user found
-
-
-        $baoyang = new Baoyang;
-        if ($baoyang_uname===null) {
-            $baoyang->user_id = auth()->user()->id;
-            //$baoyangs -> setTable(Auth::user()->ucountry.'_baoyangs_tbl');
-            $baoyang->ucountry = auth()->user()->ucountry;
-            $baoyang->city = $request->input('city');
-            $baoyang->uname = $uname;
-            $baoyang->tel = $request->input('tel');
-            $baoyang->email = auth()->user()->email;
-            $baoyang->topic = $request->input('topic');
-            $baoyang->info = $request->input('info');
-            $baoyang->age = $request->input('age');
-            $baoyang->national = $request->input('national');
-            $baoyang->look = $request->input('look');
-            $baoyang->shape = $request->input('shape');
-            $baoyang->height = $request->input('height');
-            $baoyang->hobby = $request->input('hobby');
-            $baoyang->price = $request->input('price');
-            $baoyang->period = $request->input('period');
+        $escorth = new Escorth;
+        if ($escorth->uname===null) {
+            $escorth->user_id = auth()->user()->id;
+            //$escorths -> setTable(Auth::user()->ucountry.'_escorths_tbl');
+            $escorth->ucountry = auth()->user()->ucountry;
+            $escorth->city = $request->input('city');
+            $escorth->uname = $uname;
+            $escorth->tel = $request->input('tel');
+            $escorth->email = auth()->user()->email;
+          
+            $escorth->info = $request->input('info');
+            $escorth->age = $request->input('age');
+            $escorth->national = $request->input('national');
+            $escorth->look = $request->input('look');
+            $escorth->shape = $request->input('shape');
+            $escorth->height = $request->input('height');
+            $escorth->hobby = $request->input('hobby');
+            $escorth->price = $request->input('price');
+          
           
             //  Handle File Upload
             $i=0;
@@ -107,44 +100,30 @@ class BaoyangsController extends Controller
                     $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
-                    $baoyang->{$img_column}=$fileNameToStore[$i];
+                    $escorth->{$img_column}=$fileNameToStore[$i];
                     $i++;
                 }
             } else {
                 $fileNameToStore = 'no-user.jpg';
-                $baoyang->img0=$fileNameToStore;
+                $escorth->img0=$fileNameToStore;
             }
 
           
-            $baoyang->save();
+            $escorth->save();
 
 
-            //store data to status tbl
-            if ($status_uname===null) {
             
-                $status->user_id = auth()->user()->id;
-                $status->uname = $uname;
-                $status->utype = auth()->user()->utype;
-                $status->ucountry = auth()->user()->ucountry;
-                $status->verified= 0;
 
-                $status->status= 'free';
-                $status->expire_at = date('Y-m-d', strtotime(' + 4months'));
-                $status->last_update=date("Y-m-d");
-                $status->save();
-            }
+            //email to escorths
 
 
-            //email to baoyangs
-
-
-            //Mail::to(Auth::user()->email)->send(new EmailClass('regConf.baoyangsReg',$uname));
+            //Mail::to(Auth::user()->email)->send(new EmailClass('regConf.escorthsReg',$uname));
 
 
        
-        return redirect('/baoyang')->with('success', '上传成功!');
+        return redirect('/more')->with('success', '上传成功!');
         }else{
-            return redirect('/baoyang')->with('error', '你的资料已上传过了。如须更改，请按修改按钮!');
+            return redirect('/more')->with('error', '你的资料已上传过了。如须更改，请按修改按钮!');
         }
     }
 
@@ -169,14 +148,14 @@ class BaoyangsController extends Controller
     {
         
         
-        $baoyang= Baoyang::find($id);
+        $escorth= Escorth::find($id);
         
-        if(auth()->user()->id!=$baoyang->user_id){
+        if(auth()->user()->id!=$escorth->user_id){
             //need to confirm if '/posts'
-            return redirect('/baoyangs')->with('error','unathorized page');
+            return redirect('/escorths')->with('error','unathorized page');
         }
         
-        return view('baoyangs.baoyang_edit')->with('baoyang',$baoyang);
+        return view('escorths.escorth_edit')->with('escorth',$escorth);
         
     }
 
@@ -192,7 +171,7 @@ class BaoyangsController extends Controller
         $this->validate($request, [
             'city' => 'required|string|max:30',
             'tel' => 'required|string|max:40',
-            'topic' => 'required|string|max:60',
+         
             'info' => 'required|string|max:700',
             'age'=>'required|numeric|max:99',
             'national'=>'string|max:15|nullable',
@@ -201,7 +180,7 @@ class BaoyangsController extends Controller
             'height'=>'numeric|max:5|nullable',
             'hobby'=>'string|max:25|nullable',
             'price'=>'string|max:15|nullable',
-            'period'=>'string|max:8|nullable',
+          
             'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
             'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
@@ -210,26 +189,26 @@ class BaoyangsController extends Controller
 
         $uname=auth()->user()->username;
         // user found
-        $baoyang= Baoyang::find($id);
+        $escorth= Escorth::find($id);
         
-        if ($baoyang->uname==$uname) {
-            //$baoyang->user_id = auth()->user()->id;
-            //$baoyangs -> setTable(Auth::user()->ucountry.'_baoyangs_tbl');
-            $baoyang->ucountry = auth()->user()->ucountry;
-            $baoyang->city = $request->input('city');
-            $baoyang->uname = $uname;
-            $baoyang->tel = $request->input('tel');
-            $baoyang->email = auth()->user()->email;
-            $baoyang->topic = $request->input('topic');
-            $baoyang->info = $request->input('info');
-            $baoyang->age = $request->input('age');
-            $baoyang->national = $request->input('national');
-            $baoyang->look = $request->input('look');
-            $baoyang->shape = $request->input('shape');
-            $baoyang->height = $request->input('height');
-            $baoyang->hobby = $request->input('hobby');
-            $baoyang->price = $request->input('price');
-            $baoyang->period = $request->input('period');
+        if ($escorth->uname==$uname) {
+            //$escorth->user_id = auth()->user()->id;
+            //$escorths -> setTable(Auth::user()->ucountry.'_escorths_tbl');
+            $escorth->ucountry = auth()->user()->ucountry;
+            $escorth->city = $request->input('city');
+            $escorth->uname = $uname;
+            $escorth->tel = $request->input('tel');
+            $escorth->email = auth()->user()->email;
+         
+            $escorth->info = $request->input('info');
+            $escorth->age = $request->input('age');
+            $escorth->national = $request->input('national');
+            $escorth->look = $request->input('look');
+            $escorth->shape = $request->input('shape');
+            $escorth->height = $request->input('height');
+            $escorth->hobby = $request->input('hobby');
+            $escorth->price = $request->input('price');
+          
           
             //  Handle File Upload
             $i=0;
@@ -248,26 +227,26 @@ class BaoyangsController extends Controller
                     $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
-                    $baoyang->{$img_column}=$fileNameToStore[$i];
+                    $escorth->{$img_column}=$fileNameToStore[$i];
                     $i++;
                 }
             } else {
                 $fileNameToStore = 'no-user.jpg';
-                $baoyang->img0=$fileNameToStore;
+                $escorth->img0=$fileNameToStore;
             }
 
           
-            $baoyang->save();
+            $escorth->save();
 
 
             //store data to status tbl
             
 
 
-            //email to baoyangs
+            //email to escorths
 
 
-            //Mail::to(Auth::user()->email)->send(new EmailClass('regConf.baoyangsReg',$uname));
+            //Mail::to(Auth::user()->email)->send(new EmailClass('regConf.escorthsReg',$uname));
 
 
        
@@ -285,7 +264,7 @@ class BaoyangsController extends Controller
      */
     public function destroy($id)
     {
-        $post= Baoyang::find($id);
+        $post= Escorth::find($id);
         if(auth()->user()->id!=$post->user_id){
             return redirect('/more')->with('error','you are unathorized！');
         }
@@ -293,3 +272,4 @@ class BaoyangsController extends Controller
         return redirect('/more')->with('success', '你的资料已成功删除！');
     }
 }
+

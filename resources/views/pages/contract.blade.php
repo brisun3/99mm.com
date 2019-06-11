@@ -2,11 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h5>签证条件婚约</h5>
+        <h5>移民婚约</h5>
         <hr>
-    
-    
-
 @if(count($country_num) > 0)
     
 @foreach($country_num as $country_name)
@@ -18,7 +15,7 @@
             @if($post->ucountry===$country_name->ucountry)
                             
                 <div class="col-md-3 col-sm-3">
-                        <hr>
+                        
                     @if($post->img0)
                         <div class="">
                             <img src="/storage/img_name/{{$post->img0}}" style="height:150px; width:240px" atl="无图片">
@@ -46,7 +43,7 @@
                 </div>
 
             <div class="col-md-6 col-sm-6">
-                <hr>      
+                      
                 <h5>{{$post->topic}}</h5>
               
                 <p class="">
@@ -63,7 +60,7 @@
                             电话号码:<b class="text-danger">{{$post->tel}}</b> 
                         </div>
                     @else
-                        <a href="/customerPay/contract/{{$post->user_id}}" class="btn btn-primary ">付款取得电话</a>
+                        <a href="/customerPay/{{$post->user_id}}/contract" class="btn btn-primary ">付款取得电话</a>
                     @endif
                     {{--@if (session()->has($post->user_id))
                     
@@ -87,31 +84,34 @@
             </div>
 
             <div class="col-md-3 col-sm-">
-                <hr>
+                
                 <div>
                     <ul>
                             
-                            <li>居住国家:{{$post->ucountry}}</li>
+                            <li>居住国家 :{{$post->ucountry}}</li>
                         @if($post->city)
-                            <li>现住城市:{{$post->city}}</li>
+                            <li>现住城市 :{{$post->city}}</li>
                         @endif
-                            <li>性别:{{$post->gender}}</li>
+                            <li>性别 :
+                                {{$post->gender}}
+                                 
+                            </li>
                         
                         @if($post->age)
-                            <li>年龄:{{$post->age}}</li>
+                            <li>年龄 :{{$post->age}}</li>
                         @endif
                         
                         @if($post->look)
-                            <li>相貌:{{$post->look}}</li>
+                            <li>相貌 :{{$post->look}}</li>
                         @endif
                         @if($post->visa)
-                            <li>现有身份或签证:{{$post->visa}}</li>
+                            <li>现有身份或签证 :{{$post->visa}}</li>
                         @endif
                         @if($post->mstatus)
-                            <li>婚姻状况:{{$post->mstatus}}</li>
+                            <li>婚姻状况 :{{$post->mstatus}}</li>
                         @endif
                         @if($post->national)
-                            <li>原国籍:{{$post->national}}</li>
+                            <li>原国籍 :{{$post->national}}</li>
                         @endif
                         
                     </ul>
@@ -119,6 +119,21 @@
                     <small>&nbsp&nbsp刷新日期：{{$post->updated_at}}  </small>
                 </div>
             </div>
+                        
+            <div class="container">  
+                
+                @if(!Auth::guest())
+                    @if(Auth::user()->id==$post->user_id)
+                        <a href="/contracts/{{$post->id}}/edit" class="btn btn-primary">修改</a>
+                        {!!Form::open(['action' => ['ContractsController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
+                        {{Form::hidden('_method', 'DELETE')}}
+                        {{Form::submit('删除', ['class' => 'btn btn-danger'])}}
+                        {!!Form::close()!!}
+                    @endif
+                @endif
+                <hr>
+            </div>
+              
             @endif
         @endforeach
         </div>

@@ -12,7 +12,10 @@ use App\Miss;
 use App\Ptmiss;
 use App\Massage;
 use App\Contract;
+//use App\More;
 use App\Baoyang;
+use App\Escorth;
+use App\Escortb;
 //use App\Post;
 
 
@@ -97,9 +100,9 @@ $this->ip_country=$api_result['country_name'];
             $this->city_num=$miss->select('city')->distinct('city')->get();
             //1$city_num=Miss::select('city')->distinct('city')->get();
             //$this->posts = $miss_display->orderBy('created_at','asc')->get();
-            $string_id=$tbl.'.user_id';
+            $string_id=$tbl.'.uname';
             $this->posts = DB::table($tbl)
-            ->join('statuses', $string_id,'=','statuses.user_id')
+            ->join('statuses', $string_id,'=','statuses.uname')
             
             //->where('expire_at', '<=', date('Y-m-d'))->orderBy('created_at','asc')
             ->get();
@@ -132,9 +135,9 @@ $this->ip_country=$api_result['country_name'];
             $this->city_num=$massage->select('city')->distinct('city')->get();
             //1$city_num=Miss::select('city')->distinct('city')->get();
             //$this->posts = $miss_display->orderBy('created_at','asc')->get();
-            $string_id=$tbl.'.user_id';
+            $string_id=$tbl.'.uname';
             $this->posts = DB::table($tbl)
-            ->join('statuses', $string_id,'=','statuses.user_id')
+            ->join('statuses', $string_id,'=','statuses.uname')
             
             
             ->get();
@@ -153,9 +156,10 @@ $this->ip_country=$api_result['country_name'];
             $baoyang = new Baoyang;
             
             
-            $tbl=$this->ip_country.'_baoyang_tbl';
-            $baoyang -> setTable($tbl);
-            if (Schema::hasTable($tbl)){
+            //$tbl=$this->ip_country.'_baoyang_tbl';
+            //$baoyang -> setTable($tbl);
+            //if (Schema::hasTable($tbl)){
+            if (Schema::hasTable('baoyangs')){
                 $this->city_num=Baoyang::select('city')->distinct('city')->get();
                 $this->posts = Baoyang::orderBy('created_at','asc')->get();
                 //$baoyang =Baoyang::get();
@@ -194,7 +198,7 @@ $this->ip_country=$api_result['country_name'];
         return view('pages.contract')->with('posts',$this->posts)
             ->with('country_num',$this->country_num)->with('ip_country',$this->ip_country);
     }
-
+    /*
     public function more(){
         
         $ptmiss = new Ptmiss;
@@ -207,6 +211,32 @@ $this->ip_country=$api_result['country_name'];
         }
         return view('pages.more')->with('posts',$this->posts)->
         with('city_num',$this->city_num)->with('ip_country',$this->ip_country);
+    }
+    */
+    public function more(){
+        //$posts=array();
+        $baoyang = new Baoyang;
+        if (Schema::hasTable('baoyangs')){
+            $this->city_num=$baoyang->select('city')->distinct('city')->get();
+            $baoyangs = $baoyang->orderBy('created_at','asc')->get();
+            //$baoyang =Baoyang::get();
+        }
+        $escorth = new Escorth;
+        if (Schema::hasTable('escorths')){
+            $city_num_h=$escorth->select('city')->distinct('city')->get();
+            $escorths = $escorth->orderBy('created_at','asc')->get();
+            //$baoyang =Baoyang::get();
+        }
+        $escortb = new Escortb;
+        if (Schema::hasTable('escortbs')){
+            $city_num_b=$escortb->select('city')->distinct('city')->get();
+            $escortbs = $escortb->orderBy('created_at','asc')->get();
+            //$baoyang =Baoyang::get();
+        }
+        return view('pages.more')->with('baoyangs',$baoyangs)->
+        with('city_num',$this->city_num)->with('escorths',$escorths)->
+        with('city_num_h',$city_num_h)->with('escortbs',$escortbs)->
+        with('city_num_b',$city_num_b)->with('ip_country',$this->ip_country);
     }
     public function help(){
         if(Auth::check()){

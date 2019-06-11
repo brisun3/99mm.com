@@ -121,9 +121,7 @@ class ContractsController extends Controller
             //email to contracts
 
             //Mail::to(Auth::user()->email)->send(new regEmailClass('contractReg',$uname));
-            
-
-       
+        
         return redirect('/contract')->with('success', '上传成功!');
         }else{
             return redirect('/contract')->with('error', '你的资料已上传过了!');
@@ -162,7 +160,15 @@ class ContractsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ucountry=Auth::user()->ucountry;
+        $contract= Contract::find($id);
+        
+        if(auth()->user()->id!=$contract->user_id){
+            //need to confirm if '/posts'
+            return redirect('/contracts')->with('error','unathorized page');
+        }
+        
+        return view('contracts.contract_edit')->with('contract',$contract)->with('ucountry',$ucountry);
     }
 
     /**
@@ -174,7 +180,88 @@ class ContractsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'visa' => 'required|string|max:12',
+            'tel' => 'required|string|max:40',
+            'gender' => 'required|string|max:8',
+            'info' => 'required|string|max:800',
+            'topic'=>'required|string|max:50',
+            'city'=>'string|max:20|nullable',
+            'national'=>'required|string|max:20',
+            'age'=>'required|integer|max:99',
+            'mstatus'=>'required|string|max:8',
+            'look'=>'string|max:20|nullable',
+            'price'=>'required|string|max:30|nullable',
+            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            //'img_name'=>'image|nullable'
+            //'image|mimes:jpeg,bmp,png|size:2000'
+        ]);
+
+        $uname=auth()->user()->username;
+
+        
+        $contract = Contract::find($id);
+        //$contract_uname=Contract::where('uname', '=', $uname)->first();
+            
+        
+            // user found
+
+            $contract->user_id = auth()->user()->id;
+            //$contracts -> setTable(Auth::user()->ucountry.'_contracts_tbl');
+            $contract->ucountry = auth()->user()->ucountry;
+            $contract->uname = auth()->user()->username;
+            $contract->email = auth()->user()->email;
+            $contract->topic = $request->input('topic');
+            $contract->info = $request->input('info');
+            $contract->tel = $request->input('tel');
+            $contract->email = auth()->user()->email;
+            $contract->visa = $request->input('visa');
+            $contract->city = $request->input('city');
+            $contract->national = $request->input('national');
+            $contract->gender = $request->gender;
+            $contract->age = $request->input('age');
+            $contract->mstatus= $request->input('mstatus');
+            $contract->look = $request->input('look');
+            $contract->price = $request->input('price');
+            
+            // Handle File Upload
+            $i=0;
+            if($request->hasFile('filename')){
+
+                foreach ($request->file('filename') as $photo){
+                    // Get filename with the extension
+                    $filenameWithExt = $photo->getClientOriginalName();
+                    // Get just filename
+                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    // Get just ext
+                    $extension = $photo->getClientOriginalExtension();
+                    // Filename to store
+                    $fileNameToStore[$i]= $filename.'_'.time().'.'.$extension;
+                    // Upload Image
+                    $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
+                    //dd($path);
+                    $img_column='img'.$i;
+                    $contract->{$img_column}=$fileNameToStore[$i];
+                    $i++;
+                }
+            }
+          
+            $contract->save();
+            
+            //email to contracts
+
+            //Mail::to(Auth::user()->email)->send(new regEmailClass('contractReg',$uname));
+            
+
+       
+        return redirect('/contract')->with('success', '你的资料修改成功!');
+        /*
+        {
+            return redirect('/contract')->with('error', '你的资料已修改过了!');
+        }
+        */
     }
 
     /**
@@ -185,7 +272,12 @@ class ContractsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post= Contract::find($id);
+        if(auth()->user()->id!=$post->user_id){
+            return redirect('/contract')->with('error','you are unathorized！');
+        }
+        $post->delete();
+        return redirect('/contract')->with('success', '你的资料已成功删除！');
     }
     public function email(Request $request){
         $subject=$request->input('subject');

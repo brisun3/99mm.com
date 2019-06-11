@@ -8,6 +8,10 @@ use App\User;
 use App\Miss;
 use App\Massage;
 use App\Contract;
+use App\Baoyang;
+use App\Escorth;
+use App\Escortb;
+use App\More;
 use Auth;
 use App\CreateTbl;
 use DB;
@@ -46,8 +50,6 @@ class DashboardController extends Controller
  
         $price=DB::table('price')->where('country',auth()->user()->ucountry) 
         ->where('name',$utype)->first();
-
-         
         
         //create a tbl with interupt a view, practical but not confirmed
         switch($utype){
@@ -63,8 +65,23 @@ class DashboardController extends Controller
                 ->with('price',$price)->with('status',$status);
             case 'contract':
                 return view('dashboard')->with('posts',$user->contracts)->with('utype','contract');
+            case 'more':
+                $mores=array();
+                if(count($user->baoyangs)>0){
+                    $mores=$user->baoyangs;
+                    $utype="baoyang";
+                }
+                if(count($user->escorths)>0){
+                    $mores=$user->escorths;
+                    $utype="escorth";
+                }
+                if(count($user->escortbs)>0){
+                    $mores=$user->escortbs;
+                    $utype="escortb";
+                }
+                return view('dashboard')->with('posts',$mores)->with('utype',$utype);  
             case 'baoyang':
-                return view('dashboard')->with('posts',$user->baoyangs);
+                return view('dashboard')->with('posts',$user->baoyangs)->with('utype','baoyang');
 
 
         }
@@ -86,6 +103,8 @@ class DashboardController extends Controller
                 return $a->create_massage_tbl($ucountry);
             case 'ptmiss':
                 return $a->create_ptmiss_tbl($ucountry);
+            case 'more':
+                break;
             case 'baoyang':
                 break;
             default:

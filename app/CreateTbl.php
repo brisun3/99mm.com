@@ -65,7 +65,7 @@ class createTbl extends Model
                 
                 $table->increments('id');
 
-                $table->string('uname');
+                $table->string('uname')->unique();
                 $table->integer('user_id');
                 $table->string('tel');
                 $table->string('city');
@@ -104,7 +104,7 @@ class createTbl extends Model
             {
 
                 $table->increments('id');
-                $table->string('uname');
+                $table->string('uname')->unique();
                 $table->integer('user_id');
                 $table->string('city');
                 $table->string('tel');

@@ -19,16 +19,20 @@ Route::get('/massage', 'PagesController@massage');
 Route::get('/baoyang', 'PagesController@baoyang');
 Route::get('/ptmiss', 'PagesController@ptmiss');
 Route::get('/contract', 'PagesController@contract');
+Route::get('/more', 'PagesController@more');
 Route::get('/help', 'PagesController@help')->name('help');
 //Route::resource('posts', 'PostsController');
 Route::resource('misss', 'MisssController');
 Route::resource('ptmisss', 'PtmisssController');
 Route::resource('massages', 'MassagesController');
 Route::resource('contracts', 'ContractsController');
+//Route::resource('mores', 'MoresController');
 //Route::get('/baoyangs/edit', function () {
  // return view('posts.baoyang_edit');
  // });
 Route::resource('baoyangs', 'BaoyangsController');
+Route::resource('escorths', 'EscorthsController');
+Route::resource('escortbs', 'EscortbsController');
 
 Auth::routes();
 
@@ -70,7 +74,8 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 Route::get('/listprice/{amt}/{period}', 'PayController@listprice');
-Route::get('/customerPay/{cus_type}/{user_id}', 'PayController@customerPay');
+//Route::get('/customerPay/{cus_type}/{user_id}', 'PayController@customerPay');
+Route::get('/customerPay/{user_id}/{cus_type}', 'PayController@customerPay');
 
 Route::post('/webhook', 'PayController@webhook');
 Route::get('/webhook', 'PayController@webhook');

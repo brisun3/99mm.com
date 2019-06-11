@@ -52,6 +52,7 @@ class MassagesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'uname' => 'required|string|unique|max:30',
             'city' => 'required|string|max:30',
             'tel' => 'required|string|max:40',
             'intro' => 'required|string|max:700',
@@ -88,7 +89,7 @@ class MassagesController extends Controller
             
         ]);
 
-        $uname=auth()->user()->username;
+        $uname=$request->input('uname');
 
         $status = new Status;
         $status_uname=Status::where('uname', '=', $uname)->first();
@@ -262,6 +263,7 @@ class MassagesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'uname' => 'required|string|unique|max:30',
             'city' => 'required|string|max:30',
             'tel' => 'required|string|max:40',
             'intro' => 'required|string|max:700',
@@ -299,17 +301,14 @@ class MassagesController extends Controller
 
         $uname=auth()->user()->username;
         
-        $status = Status::find($id);
-        $status_uname=Status::where('uname', '=', $uname)->first();
-        
-        if ($status_uname!=null) {
+        // $status = Status::find($id);
+        // $status_uname=Status::where('uname', '=', $uname)->first();
         
             // user found
 
-
-            $massage = massage::find($id);
-            //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
-            
+        $massage = Massage::find($id);
+        //$massage -> setTable(Auth::user()->ucountry.'_massage_tbl');
+        if ($massage->uname!=null) {
 
             // Handle File Upload
             $i=0;
@@ -373,7 +372,7 @@ class MassagesController extends Controller
             $status->last_update=date("Y-m-d");
             $status->save();
             */
-        return redirect('/massage')->with('success', '资料修改成功！');
+        return redirect('/massages/'.$massage->id)->with('success', '资料修改成功！');
         }else{
             return redirect('/massage')->with('fail', '你已上传过了！');
         }
@@ -388,7 +387,7 @@ class MassagesController extends Controller
      */
     public function destroy($id)
     {
-        $post= massage::find($id);
+        $post= Massage::find($id);
         if(auth()->user()->id!=$post->user_id){
             return redirect('/massage')->with('error','you are unathorized！');
         }

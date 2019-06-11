@@ -80,6 +80,7 @@ class MisssController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'uname' => 'required|string|max:30',
             'city' => 'required|string|max:30',
             'tel' => 'required|string|max:40',
             'intro' => 'required|string|max:700',
@@ -89,7 +90,7 @@ class MisssController extends Controller
             'national'=>'string|max:15|nullable',
             'shape'=>'string|max:8|nullable',
             'skin'=>'string|max:8|nullable',
-            'height'=>'numeric|max:5|nullable',
+            'height'=>'numeric|max:3|nullable',
             'chest'=>'numeric|max:100|nullable',
             'waist'=>'numeric|max:100|nullable',
             'weight'=>'numeric|max:300|nullable',
@@ -116,18 +117,19 @@ class MisssController extends Controller
             
         ]);
 
-        $uname=auth()->user()->username;
-
+        //$uname=auth()->user()->username;
+        $uname = $request->input('uname');  
         $status = new Status;
         $status_uname=Status::where('uname', '=', $uname)->first();
-        if ($status_uname===null) {
+        
             // user found
 
 
-            $miss = new Miss;
+        $miss = new Miss;
             //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
+        if ($miss->uname===null) {
             $miss->city = $request->input('city');
-            $miss->uname = $uname;
+            $miss->uname = $request->input('uname');
             $miss->tel = $request->input('tel');
             $miss->addr1 = $request->input('addr1');
             $miss->addr2 = $request->input('addr2');
@@ -205,19 +207,20 @@ class MisssController extends Controller
             //store data to status tbl
 
             //$miss -> setTable(Auth::user()->ucountry.'_miss_tbl');
-            $status->user_id = auth()->user()->id;
-            $status->uname = $uname;
-            $status->utype = auth()->user()->utype;
-            $status->ucountry = auth()->user()->ucountry;
-            $status->verified= 0;
+            if ($status_uname===null) {
+                $status->user_id = auth()->user()->id;
+                $status->uname = $request->input('uname');
+                $status->utype = auth()->user()->utype;
+                $status->ucountry = auth()->user()->ucountry;
+                $status->verified= 0;
 
-            $status->status= 'free';
-            $expire=date('Y-m-d', strtotime(' + 2months'));
-            $status->expire_at = $expire;
-            $status->discount_to = date('Y-m-d', strtotime($expire.'+ 28days'));
-            $status->last_update=date("Y-m-d");
-            $status->save();
-
+                $status->status= 'free';
+                $expire=date('Y-m-d', strtotime(' + 2months'));
+                $status->expire_at = $expire;
+                $status->discount_to = date('Y-m-d', strtotime($expire.'+ 28days'));
+                $status->last_update=date("Y-m-d");
+                $status->save();
+            }
 
 
             //email to miss
@@ -287,6 +290,7 @@ class MisssController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'uname' => 'required|string|max:30',
             'city' => 'required|string|max:30',
             'tel' => 'required|string|max:40',
             'intro' => 'required|string|max:700',
@@ -398,7 +402,7 @@ class MisssController extends Controller
             $status->last_update=date("Y-m-d");
             $status->save();
             */
-        return redirect('/')->with('success', '资料修改成功！');
+        return redirect('/misss/'.$miss->id)->with('success', '资料修改成功！');
         }else{
             return redirect('/')->with('fail', '你已上传过了！');
         }

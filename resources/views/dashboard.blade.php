@@ -156,7 +156,7 @@
                                     <td>按摩</td>
                                     @break
                                 @case('contract')
-                                    <td>签证条件婚约</td>
+                                    <td>移民婚约</td>
                                     @break
                                 @case('more')
                                     <td>更多</td>
@@ -164,23 +164,32 @@
                                 @case('baoyang')
                                     <td>包养</td>
                                     @break
-                                
+                                @case('escorth')
+                                    <td>伴游</td>
+                                    @break
+                                @case('escortb')
+                                    <td>商务陪伴</td>
+                                    @break
+                                                              
                                     
                             @endswitch
                                 
                                 <td>{{$post->created_at}}</td>
-                                <td><a class="btn btn-primary" href="/misss/{{$post->id}}/edit">修改</a></td>
-                                <td>{!!Form::open(['action' => ['MisssController@destroy', $post->id], 'method' => 'POST', 'class' => 'float-right'])!!}
+                            <td><a class="btn btn-primary" href="/{{$utype}}s/{{$post->id}}/edit">修改</a></td>
+                            @if(($utype!='baoyang')&&($utype!='escorth')&&($utype!='escortb'))
+                                <td>{!!Form::open(['action' => ['BaoyangsController@destroy', $post->id,$utype], 'method' => 'POST', 'class' => 'float-right'])!!}
                                         {{Form::hidden('_method', 'DELETE')}}
                                         {{Form::submit('删除', ['class' => 'btn btn-danger'])}}
                                         {!!Form::close()!!}</td>
+                            @endif
                             </tr>
                             
                             @endforeach
 
                         </table>
                         @else
-                        <p>你没有上传的资料。</p>
+                        <p>你没有上传的资料。
+                        </p>
                         @endif
                     
                 </div>

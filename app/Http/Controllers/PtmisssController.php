@@ -101,7 +101,7 @@ class PtmisssController extends Controller
          
         return redirect('/ptmiss')->with('success', '上传成功!');
         }else{
-            return redirect('/ptmiss')->with('error', '你的资料已上传过了!');
+            return redirect('/ptmiss')->with('error', '你的资料已上传过了。如须更改，请按修改键进行修改!');
         }
 
     }

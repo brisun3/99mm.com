@@ -7,9 +7,12 @@
   <div class="jumbotron">
   <h5>主要资料</h5>
   <label>国家:{{$ucountry}}</label>
-  <label>  &nbsp&nbsp &nbsp 用户名:{{$miss->uname}}</label>
+  
   {!!Form::open(['action' => ['MisssController@update',$miss->id], 'method'=>'post','enctype'=>'multipart/form-data']) !!}
-    
+  <div class="form-group form-inline {{ $errors->has('city') ? 'has-error' : ''}}">
+    {{Form::label('uname', '用户名 :  ')}}
+    {{Form::text('uname', $miss->uname, ['class' => 'form-control', 'placeholder' => '用户名'])}}
+  </div>
   <div class="form-group form-inline">
     {{Form::label('city', '城市 :  ')}}
     {{Form::text('city', $miss->city, ['class' => 'form-control', 'placeholder' => '城市'])}}
@@ -57,11 +60,11 @@
   </div>
   <div class="form-group form-inline">
     {{Form::label('height', '身高 :  ')}}
-    {{Form::number('height', $miss->height, ['class' => 'form-control', 'min' => '0.01','step=0.01','placeholder' => '身高,m'])}}
+    {{Form::number('height', $miss->height, ['class' => 'form-control', 'min' => '1','step'=>'0.05','placeholder' => '身高,m'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('chest', '胸围 :')}}
-    {{Form::number('chest', $miss->chest, ['class' => 'form-control','min' => '1', 'step'=>'0.01','placeholder' => '胸围,cm'])}}
+    {{Form::number('chest', $miss->chest, ['class' => 'form-control','min' => '1', 'placeholder' => '胸围,cm'])}}
   </div>
   <div class="form-group form-inline">
     {{Form::label('waist', '腰围 :')}}

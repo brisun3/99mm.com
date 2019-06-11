@@ -34,6 +34,8 @@ class CreateContractsTable extends Migration
             $table->string('img0')->nullable();
             $table->string('img1')->nullable();
             $table->string('img2')->nullable();
+            $table->boolean('verified')->nullable();
+            $table->date('expired_at')->nullable();
             // $table->softDeletes();
             // $table->deleted_at();
             $table->timestamps();

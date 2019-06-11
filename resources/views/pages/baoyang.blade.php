@@ -6,7 +6,7 @@
     
 
 @if(count($city_num) > 0)
-    
+    <h1>BBBBBYYYYYY</h1>
         @foreach($city_num as $city_name)
 <h2>{{$city_name->city}}</h2>
 @if(count($posts) > 0)
@@ -18,9 +18,9 @@
             
                         
                     <div class="col-md-4 col-sm-3">
-                        @if($post->img_name)
+                        @if($post->img0)
                         <a href="/posts/{{$post->id}}">
-                            <img src="/storage/img_name/{{$post->img_name}}" style="height:130px; width:200px">
+                            <img src="/storage/img_name/{{$post->img0}}" style="height:130px; width:200px">
                         </a>
                             @else
                             <a href="/posts/{{$post->id}}">

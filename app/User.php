@@ -50,8 +50,17 @@ class User extends Authenticatable
     public function contracts(){
         return $this->hasMany('App\Contract');
     }
+    public function mores(){
+        return $this->hasMany('App\More');
+    }
     public function baoyangs(){
         return $this->hasMany('App\Baoyang');
+    }
+    public function escorths(){
+        return $this->hasMany('App\Escorth');
+    }
+    public function escortbs(){
+        return $this->hasMany('App\Escortb');
     }
 
 

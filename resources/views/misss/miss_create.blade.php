@@ -7,8 +7,12 @@
   
   <h5>主要资料</h5>
   <label>国家:{{$ucountry}}</label>
-  <label>  &nbsp&nbsp &nbsp 用户名:{{$uname}}</label>
+  
   {!!Form::open(['action' => 'MisssController@store', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
+    <div class="form-group form-inline {{ $errors->has('city') ? 'has-error' : ''}}">
+      {{Form::label('uname', '用户名 :  ')}}
+      {{Form::text('uname', $uname, ['class' => 'form-control', 'placeholder' => '用户名'])}}
+    </div>
     <div class="form-group form-inline {{ $errors->has('city') ? 'has-error' : ''}}">
       {{Form::label('city', '城市 :  ')}}
       {{Form::text('city', '', ['class' => 'form-control', 'placeholder' => '城市'])}}
@@ -47,7 +51,7 @@
       {{Form::text('national', '', ['class' => 'form-control', 'placeholder' => '来自国家'])}}
     </div>
     <div class="form-group form-inline {{ $errors->has('shape') ? 'has-error' : ''}}">
-      {{Form::label('shape', '身材型 :')}}
+      {{Form::label('shape', '身材 :')}}
       {{Form::text('shape', '', ['class' => 'form-control', 'placeholder' => '如：苗条，丰满，匀称'])}}
     </div>
 
@@ -57,7 +61,7 @@
     </div>
     <div class="form-group form-inline {{ $errors->has('height') ? 'has-error' : ''}}">
       {{Form::label('height', '身高 :  ')}}
-      {{Form::number('height', '', ['class' => 'form-control','min' => '0.01','step' => '0.01', 'placeholder' => '身高,米'])}}
+      {{Form::number('height', '', ['class' => 'form-control','min' => '1','step' => '0.05', 'placeholder' => '身高,米'])}}
     </div>
     <div class="form-group form-inline {{ $errors->has('chest') ? 'has-error' : ''}}">
       {{Form::label('chest', '胸围 :')}}
@@ -83,7 +87,7 @@
     </div>
     <div class="form-group form-inline {{ $errors->has('lan_des') ? 'has-error' : ''}}">
       {{Form::label('lan_des', '语言说明 :')}}
-      {{Form::text('lan_des', '', ['class' => 'form-control', 'placeholder' => '语言说明'])}}
+      {{Form::textarea('lan_des', '', ['class' => 'form-control textarea20', 'placeholder' => '语言说明'])}}
     </div>
     <h5>价格</h5>
     <div class="form-group form-inline {{ $errors->has('price30') ? 'has-error' : ''}}">
@@ -101,7 +105,7 @@
 
     <div class="form-group form-inline {{ $errors->has('price_note') ? 'has-error' : ''}}">
       {{Form::label('price_note', '价格说明：')}}
-      {{Form::text('price_note', '', ['class' => 'form-control', 'placeholder' => '价格说明'])}}
+      {{Form::textarea('price_note', '', ['class' => 'form-control textarea20', 'placeholder' => '价格说明'])}}
     </div>
     <h5>服务内容</h5>
     <div class="form-group form-inline {{ $errors->has('service_des') ? 'has-error' : ''}}">
@@ -110,7 +114,7 @@
     </div>
     <div class="form-group form-inline {{ $errors->has('special_serv') ? 'has-error' : ''}}">
       {{Form::label('special_serv', '特色服务：')}}
-      {{Form::text('special_serv', '', ['class' => 'form-control', 'placeholder' => '特色服务'])}}
+      {{Form::textarea('special_serv', '', ['class' => 'form-control textarea30', 'placeholder' => '特色服务'])}}
     </div>
 
     <div class="form-group form-inline ">

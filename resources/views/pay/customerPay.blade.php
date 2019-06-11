@@ -18,6 +18,9 @@
         ?>
         
         @if($cus_type=='baoyang')
+          @php
+              $amt=5;
+          @endphp
             <p>查看该电话号码，须付{{$amt}}欧元。</p>
         @endif
         
@@ -184,7 +187,13 @@
           //+{{$user_id}};
           //console.log(result);
           setTimeout(function () {
-          window.location="/contract";
+          var cusType="{{$cus_type}}";
+          if (cusType=="baoyang"|"escort"|"escortb"){
+            cusType="more";
+          }
+          window.location="/"+cusType;
+          //var cusType={{$cus_type}};
+          //window.location="/baoyang";
           }, 2000);
         }
       });

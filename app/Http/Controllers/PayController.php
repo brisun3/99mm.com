@@ -159,7 +159,7 @@ class PayController extends Controller
         
     }
 
-    public function customerPay($cus_type,$user_id)
+    public function customerPay($user_id,$cus_type)
     {
         
         setcookie('contract_email', 'myemail', time() + 60000, "/");

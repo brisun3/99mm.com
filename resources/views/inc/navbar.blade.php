@@ -31,17 +31,15 @@
               <li class="nav-item">
                   <a class="nav-link" href="/contract">移民婚约</a>
               </li>
-             
               
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   更多
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="/baoyang">包养</a>
-                  <a class="dropdown-item" href="/escort">伴游</a>
-                  <a class="dropdown-item" href="/bussE">商务陪伴</a>
-                  
+                  <a class="dropdown-item" href="/more">包养</a>
+                  <a class="dropdown-item" href="/more">伴游</a>
+                  <a class="dropdown-item" href="/more">商务陪伴</a>
                   
                 </div>
               </li>
@@ -66,14 +64,18 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('dashboard') }}">
+                            
+                              {{ __('帐户管理') }}
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('退出') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

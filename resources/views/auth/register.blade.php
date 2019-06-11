@@ -42,14 +42,14 @@
                             <label for="utype" class="col-md-4 col-form-label text-md-right">{{ __('注册类别') }}</label>
                             <div class="col-md-6">
                             
-                            在
+                            用于在
                             <select id="utype"  class="{{ $errors->has('utype') ? ' is-invalid' : '' }}" name="utype" value="{{ old('utype') }}" required autofocus>
                                 <option value="miss">专职小姐</option>
                                 <option value="massage">按摩</option>
-                                <option value="ptmiss">业余兼职</option>
-                                <option value="contract">签证身份婚约</option>
+                                <option value="ptmiss">业余客串</option>
+                                <option value="contract">移民婚约</option>
                                 <option value="baoyang">包养</option>
-                                <option value="others">其它服务</option>
+                                <option value="more">更多服务</option>
                                 
                               </select>
                               栏目里发布信息资料。
