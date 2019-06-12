@@ -28,7 +28,7 @@
 
 		<div class="form-group">
 			<label for="message">内容: </label>
-			<textarea type="text" rows="12" class="form-control luna-message" id="help_msg" placeholder="Type your messages here" name="message" required></textarea>
+			<textarea type="text" rows="12" class="form-control luna-message" id="help_msg" placeholder="" name="message" required></textarea>
 		</div>
 
 			<div class="form-group">

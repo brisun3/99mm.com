@@ -48,7 +48,7 @@
                                 <option value="massage">按摩</option>
                                 <option value="ptmiss">业余客串</option>
                                 <option value="contract">移民婚约</option>
-                                <option value="baoyang">包养</option>
+                                {{--<option value="baoyang">包养</option>--}}
                                 <option value="more">更多服务</option>
                                 
                               </select>

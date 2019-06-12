@@ -3,9 +3,10 @@
 @section('content')
 <div class="container">
     <h5>按摩页<h5>
-        <hr>
-    <h5> {{$ip_country}}</h5>
+    <hr>
+    
     @if(count($city_num) > 0)
+        <h5> {{$ip_country}}</h5>
         @foreach($city_num as $city_name)
             <h2>{{$city_name->city}}</h2>
             

@@ -153,7 +153,8 @@
                 <p>对不起，没有包养的资料。</p>
             @endif
         @endforeach
-    
+    @else
+    <p>对不起，没有包养(协议式关系)信息。</p>
     @endif
     <!--escorth starts-->
     @if(count($city_num_h) > 0)
@@ -296,7 +297,8 @@
                 <p>对不起，没有伴游的资料。</p>
             @endif
         @endforeach
-    
+    @else
+        <p>对不起，没有伴游信息。</p>
     @endif
     <!--escortb starts-->
     @if(count($city_num_b) > 0)
@@ -436,10 +438,11 @@
                 @endforeach
                 </div>
             @else
-                <p>对不起，没有escortb的资料。</p>
+                <p>对不起，没有商务陪伴的资料。</p>
             @endif
         @endforeach
-    
+    @else
+        <p>对不起，没有商务陪伴的信息。</p>
     @endif
     </div> 
 
