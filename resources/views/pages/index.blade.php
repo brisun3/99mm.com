@@ -48,7 +48,7 @@
 </div>
 
    
-    <div id="map" style="height:30%"></div>
+    <div id="map" class="invisible"></div>
     <script>
       var map;
       function initMap() {
@@ -59,7 +59,7 @@
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi9zEbNbmidV5rNdS3kcM0gEW1oAOYelY&callback=initMap"
-    async defer></script>      
+    async defer></script>     
 @endsection
 
 

@@ -13,15 +13,17 @@
   
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
+      /*
+       #map {
         height:60%;
         width:60%;
       }
+      */
       /* Optional: Makes the sample page fill the window. */
       ul {
         list-style-type: none;
       }
-      .input-1000 { 
+      #addr2 { 
         width: 400px ;
        }
        .label-note{

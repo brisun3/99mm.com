@@ -49,7 +49,7 @@
 </div>
 
    
-    <div id="map" style="height:30%"></div>
+    <div id="map" class="invisible"></div>
     <script>
       var map;
       function initMap() {

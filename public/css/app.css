@@ -10662,6 +10662,79 @@ a.text-dark:focus {
   }
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#test {
+  background-color: yellow;
+}
+
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+
+/*
+ #map {
+  height:60%;
+  width:60%;
+}
+*/
+
+/* Optional: Makes the sample page fill the window. */
+
+ul {
+  list-style-type: none;
+}
+
+#addr2 {
+  width: 400px;
+}
+
+.label-note {
+  font-weight: normal;
+  color: blue;
+}
+
+label {
+  font-weight: normal !important;
+}
+
+h5 {
+  font-weight: bold !important;
+}
+
+.ptimg {
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+  /* ie8 */
+}
+
+.ptimgsub {
+  max-width: 50%;
+  height: auto;
+  width: auto\9;
+  /* ie8 */
+}
+
+.btn-secondary {
+  padding: 3px;
+  height: 72%;
+}
+
+.textarea20 {
+  height: 2em;
+  width: 100%;
+}
+
+.textarea30 {
+  height: 3em;
+  max-width: 100%;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

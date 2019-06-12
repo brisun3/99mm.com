@@ -28,7 +28,7 @@
     </div>
     <div class="form-group form-inline {{ $errors->has('addr2') ? 'has-error' : ''}} ">
       {{Form::label('addr2', '详细地址 :  ')}}
-      {{Form::text('addr2', '', ['class' => 'form-control', 'class' => 'input-1000', 'placeholder' => '地址'])}}
+      {{Form::text('addr2', '', ['class' => 'form-control', 'placeholder' => '地址'])}}
 
       <input id="show_marker" type="button" class="btn btn-primary" value="在地图中查看位置是否正确">
       <label class="label-note">注：本栏需要实际存在地址,可在地图上用图标标出，以方便顾客查找。地址文字不在网页上显示,与你的工作场所可以有误差。</label>
@@ -87,7 +87,7 @@
     </div>
     <div class="form-group form-inline {{ $errors->has('lan_des') ? 'has-error' : ''}}">
       {{Form::label('lan_des', '语言说明 :')}}
-      {{Form::textarea('lan_des', '', ['class' => 'form-control textarea20', 'placeholder' => '语言说明'])}}
+      {{Form::textarea('lan_des', '', ['class' => 'form-control textarea20', 'rows'=>'2','placeholder' => '语言说明'])}}
     </div>
     <h5>价格</h5>
     <div class="form-group form-inline {{ $errors->has('price30') ? 'has-error' : ''}}">
@@ -105,16 +105,16 @@
 
     <div class="form-group form-inline {{ $errors->has('price_note') ? 'has-error' : ''}}">
       {{Form::label('price_note', '价格说明：')}}
-      {{Form::textarea('price_note', '', ['class' => 'form-control textarea20', 'placeholder' => '价格说明'])}}
+      {{Form::textarea('price_note', '', ['class' => 'form-control textarea20', 'rows'=>'3','placeholder' => '价格说明'])}}
     </div>
     <h5>服务内容</h5>
     <div class="form-group form-inline {{ $errors->has('service_des') ? 'has-error' : ''}}">
       {{Form::label('service_des', '主要服务：')}}
-      {{Form::text('service_des', '', ['class' => 'form-control', 'placeholder' => '主要服务'])}}
+      {{Form::textarea('service_des', '', ['class' => 'form-control', 'rows'=>'3','placeholder' => '主要服务'])}}
     </div>
     <div class="form-group form-inline {{ $errors->has('special_serv') ? 'has-error' : ''}}">
       {{Form::label('special_serv', '特色服务：')}}
-      {{Form::textarea('special_serv', '', ['class' => 'form-control textarea30', 'placeholder' => '特色服务'])}}
+      {{Form::textarea('special_serv', '', ['class' => 'form-control','rows'=>'2', 'placeholder' => '特色服务'])}}
     </div>
 
     <div class="form-group form-inline ">

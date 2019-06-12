@@ -125,8 +125,7 @@
                     @endif
                         
                                                     
-                        <a href="misss/create" class="btn btn-primary">创建文档</a>
-                        <hr>
+                        
                         
                         @if(count($posts)>0)
                         <h6>你已上传的资料</h6>
@@ -136,7 +135,7 @@
                                     <th></th>
                                 <th>所在栏目</th>
                                 <th>创建日期</th>
-                                
+                                <th></th>
                             </tr>
                             @foreach($posts as $post)
                             <?php $i=0;
@@ -176,20 +175,26 @@
                                 
                                 <td>{{$post->created_at}}</td>
                             <td><a class="btn btn-primary" href="/{{$utype}}s/{{$post->id}}/edit">修改</a></td>
-                            @if(($utype!='baoyang')&&($utype!='escorth')&&($utype!='escortb'))
+                            {{--@if(($utype!='baoyang')&&($utype!='escorth')&&($utype!='escortb'))
                                 <td>{!!Form::open(['action' => ['BaoyangsController@destroy', $post->id,$utype], 'method' => 'POST', 'class' => 'float-right'])!!}
                                         {{Form::hidden('_method', 'DELETE')}}
                                         {{Form::submit('删除', ['class' => 'btn btn-danger'])}}
                                         {!!Form::close()!!}</td>
-                            @endif
+                            @endif--}}
                             </tr>
                             
                             @endforeach
-
+                            
                         </table>
+                        @if(($utype=='miss')|($utype=='massage'))
+                                <a href="misss/create" class="btn btn-primary">再创建文档</a>
+                                        
+                            @endif
                         @else
                         <p>你没有上传的资料。
                         </p>
+                        <a href="misss/create" class="btn btn-primary">创建文档</a>
+                        
                         @endif
                     
                 </div>

@@ -28,7 +28,7 @@
     </div>
     <div class="form-group form-inline {{ $errors->has('addr2') ? 'has-error' : ''}} ">
       {{Form::label('addr2', '详细地址 :  ')}}
-      {{Form::text('addr2', '', ['class' => 'form-control', 'class' => 'input-1000', 'placeholder' => '地址'])}}
+      {{Form::text('addr2', '', ['class' => 'form-control',  'placeholder' => '地址'])}}
 
       <input id="show_marker" type="button" class="btn btn-primary" value="在地图中查看位置是否正确">
       <label class="label-note">注：本栏需要实际存在地址,可在地图上用图标标出，以方便顾客查找。地址文字不在网页上显示,与你的工作场所可以有误差。</label>

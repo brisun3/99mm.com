@@ -52,7 +52,7 @@ class MassagesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'uname' => 'required|string|unique|max:30',
+            'uname' => 'required|string|max:30',
             'city' => 'required|string|max:30',
             'tel' => 'required|string|max:40',
             'intro' => 'required|string|max:700',
@@ -263,7 +263,7 @@ class MassagesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'uname' => 'required|string|unique|max:30',
+            'uname' => 'required|string|max:30',
             'city' => 'required|string|max:30',
             'tel' => 'required|string|max:40',
             'intro' => 'required|string|max:700',

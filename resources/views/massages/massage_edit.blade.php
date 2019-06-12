@@ -27,7 +27,7 @@
   </div>
   <div class="form-group form-inline ">
     {{Form::label('addr2', '详细地址 :  ')}}
-    {{Form::text('addr2', $massage->addr2, ['class' => 'form-control', 'class' => 'input-1000', 'placeholder' => '地址'])}}
+    {{Form::text('addr2', $massage->addr2, ['class' => 'form-control',  'placeholder' => '地址'])}}
     
     <input id="show_marker" type="button" class="btn btn-primary" value="在地图中查看位置是否正确">
     <label class="label-note">注：本地址用于在地图上标出，以方便顾客查找。因此要实际存在地址，可误差20-30米，地址文字不在网页上显示.</label>
