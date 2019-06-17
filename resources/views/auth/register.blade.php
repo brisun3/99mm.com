@@ -45,18 +45,15 @@
                             用于在
                             <select id="utype"  class="{{ $errors->has('utype') ? ' is-invalid' : '' }}" name="utype" value="{{ old('utype') }}" required autofocus>
                                 <option value="miss">专职小姐</option>
-                                <option value="massage">按摩</option>
                                 <option value="ptmiss">业余客串</option>
+                                <option value="massage">按摩</option>
                                 <option value="contract">移民婚约</option>
                                 {{--<option value="baoyang">包养</option>--}}
-                                <option value="more">更多服务</option>
+                                <option value="more">更多</option>
                                 
                               </select>
                               栏目里发布信息资料。
                             
-                            
-                                
-
                                 @if ($errors->has('utype'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('utype') }}</strong>

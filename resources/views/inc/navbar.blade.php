@@ -4,7 +4,8 @@
   <nav class="navbar navbar-expand-md navbar-dark  navbar-laravel" style="background-color: green;">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+            {{--{{ config('app.name', 'Laravel') }}--}}
+            99 妹妹
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>

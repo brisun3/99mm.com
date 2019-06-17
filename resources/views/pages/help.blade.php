@@ -5,7 +5,8 @@
 
 @section('content')
 <div class="container">
-	<h1 class="mb-2 text-center">联系我们</h1>
+	<h5 class="mb-2 text-center">联系我们</h5>
+	<hr>
 	
 	@if(session('message'))
 	<div class='alert alert-success'>
@@ -32,7 +33,7 @@
 		</div>
 
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary" value="Send">Send</button>
+				<button type="submit" class="btn btn-primary" value="Send">发送Email</button>
             </div>
             
 		</form>
