@@ -9,6 +9,7 @@ use App\Escortb;
 use App\Status;
 use Mail;
 use App\Mail\EmailClass;
+use Image;
 
 class EscortbsController extends Controller
 {
@@ -56,9 +57,9 @@ class EscortbsController extends Controller
             'hobby'=>'string|max:25|nullable',
             'price'=>'string|max:15|nullable',
             
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
                       
         ]);
 
@@ -98,8 +99,9 @@ class EscortbsController extends Controller
                     $extension = $photo->getClientOriginalExtension();
                     // Filename to store
                     $fileNameToStore[$i]= $filename.'_'.time().'.'.$extension;
+                    $img[$i]=Image::make($photo)->resize(null,300)->save(public_path().'/storage/img_name/'.$fileNameToStore[$i]);
                     // Upload Image
-                    $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
+                    //$path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
                     $escortb->{$img_column}=$fileNameToStore[$i];
@@ -227,8 +229,9 @@ class EscortbsController extends Controller
                     $extension = $photo->getClientOriginalExtension();
                     // Filename to store
                     $fileNameToStore[$i]= $filename.'_'.time().'.'.$extension;
+                    $img[$i]=Image::make($photo)->resize(null,300)->save(public_path().'/storage/img_name/'.$fileNameToStore[$i]);
                     // Upload Image
-                    $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
+                    //$path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
                     $escortb->{$img_column}=$fileNameToStore[$i];

@@ -9,6 +9,7 @@ use App\Ptmiss;
 use App\Status;
 use Mail;
 use App\Mail\regEmailClass;
+use Image;
 
 
 class PtmisssController extends Controller
@@ -24,9 +25,10 @@ class PtmisssController extends Controller
         $this->validate($request, [
             'city' => 'required',
             'tel' => 'required',
-            'intro' => 'required'
-            //'img_name'=>'image|nullable'
-            //'image|mimes:jpeg,bmp,png|size:2000'
+            'intro' => 'required',
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
         ]);
 
         $uname=auth()->user()->username;
@@ -71,8 +73,9 @@ class PtmisssController extends Controller
                     $extension = $photo->getClientOriginalExtension();
                     // Filename to store
                     $fileNameToStore[$i]= $filename.'_'.time().'.'.$extension;
+                    $img[$i]=Image::make($photo)->resize(null,300)->save(public_path().'/storage/img_name/'.$fileNameToStore[$i]);
                     // Upload Image
-                    $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
+                    //$path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
                     $ptmiss->{$img_column}=$fileNameToStore[$i];

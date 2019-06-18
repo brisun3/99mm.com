@@ -9,6 +9,7 @@ use App\Escorth;
 use App\Status;
 use Mail;
 use App\Mail\EmailClass;
+use Image;
 
 class EscorthsController extends Controller
 {
@@ -55,9 +56,9 @@ class EscorthsController extends Controller
             'hobby'=>'string|max:25|nullable',
             'price'=>'string|max:15|nullable',
             
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
                       
         ]);
 
@@ -181,9 +182,9 @@ class EscorthsController extends Controller
             'hobby'=>'string|max:25|nullable',
             'price'=>'string|max:15|nullable',
           
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
                       
         ]);
 

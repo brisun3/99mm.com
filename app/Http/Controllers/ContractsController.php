@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Contract;
 use App\Status;
+use Image;
 
 class ContractsController extends Controller
 {
@@ -49,9 +50,9 @@ class ContractsController extends Controller
             'mstatus'=>'required|string|max:8',
             'look'=>'string|max:20|nullable',
             'price'=>'required|string|max:30|nullable',
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
             //'img_name'=>'image|nullable'
             //'image|mimes:jpeg,bmp,png|size:2000'
         ]);
@@ -192,9 +193,9 @@ class ContractsController extends Controller
             'mstatus'=>'required|string|max:8',
             'look'=>'string|max:20|nullable',
             'price'=>'required|string|max:30|nullable',
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
             //'img_name'=>'image|nullable'
             //'image|mimes:jpeg,bmp,png|size:2000'
         ]);

@@ -10,7 +10,7 @@ use App\Status;
 //for email
 use Mail;
 use App\Mail\regEmailClass;
-
+use Image;
 
 class MassagesController extends Controller
 {
@@ -76,16 +76,16 @@ class MassagesController extends Controller
             'service_des'=>'string|max:100|nullable',
             'special_serv'=>'string|max:100|nullable',
             'western_serv'=>'in:1|nullable',
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img3'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img4'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img5'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img6'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img7'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img8'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img9'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img3'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img4'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img5'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img6'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img7'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img8'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img9'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
             
         ]);
 
@@ -120,8 +120,9 @@ class MassagesController extends Controller
                     $extension = $photo->getClientOriginalExtension();
                     // Filename to store
                     $fileNameToStore[$i]= $filename.'_'.time().'.'.$extension;
+                    $img[$i]=Image::make($photo)->resize(null,300)->save(public_path().'/storage/img_name/'.$fileNameToStore[$i]);
                     // Upload Image
-                    $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
+                    //$path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
                     $massage->{$img_column}=$fileNameToStore[$i];
@@ -287,16 +288,16 @@ class MassagesController extends Controller
             'service_des'=>'string|max:100|nullable',
             'special_serv'=>'string|max:100|nullable',
             'western_serv'=>'in:1|nullable',
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img3'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img4'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img5'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img6'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img7'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img8'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img9'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img3'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img4'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img5'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img6'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img7'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img8'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img9'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
         ]);
 
         $uname=auth()->user()->username;
@@ -323,8 +324,9 @@ class MassagesController extends Controller
                     $extension = $photo->getClientOriginalExtension();
                     // Filename to store
                     $fileNameToStore[$i]= $filename.'_'.time().'.'.$extension;
+                    $img[$i]=Image::make($photo)->resize(null,300)->save(public_path().'/storage/img_name/'.$fileNameToStore[$i]);
                     // Upload Image
-                    $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
+                    //$path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
                     $massage->{$img_column}=$fileNameToStore[$i];

@@ -11,6 +11,7 @@ use App\Status;
 //for email
 use Mail;
 use App\Mail\regEmailClass;
+use Image;
 
 
 class MisssController extends Controller
@@ -104,16 +105,16 @@ class MisssController extends Controller
             'service_des'=>'string|max:100|nullable',
             'special_serv'=>'string|max:100|nullable',
             'western_serv'=>'in:1|nullable',
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img3'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img4'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img5'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img6'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img7'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img8'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img9'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img3'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img4'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img5'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img6'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img7'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img8'=>'image|mimes:jpeg,bmp,png|size:7000|nullable',
+            'img9'=>'image|mimes:jpeg,bmp,png|size:7000|nullable'
             
         ]);
 
@@ -139,6 +140,7 @@ class MisssController extends Controller
             if($request->hasFile('filename')){
 
                 foreach ($request->file('filename') as $photo){
+                    
                     // Get filename with the extension
                     $filenameWithExt = $photo->getClientOriginalName();
                     // Get just filename
@@ -147,8 +149,13 @@ class MisssController extends Controller
                     $extension = $photo->getClientOriginalExtension();
                     // Filename to store
                     $fileNameToStore[$i]= $filename.'_'.time().'.'.$extension;
+                    //working with intervention/image
+                   
+                    $img[$i]=Image::make($photo)->resize(null,300)->save(public_path().'/storage/img_name/'.$fileNameToStore[$i]);
+                    //Image::make($photo)->resize(null,300)->save('public/img_name/'.$fileNameToStore[$i]);
+                    
                     // Upload Image
-                    $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
+                    //$path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
                     $miss->{$img_column}=$fileNameToStore[$i];
@@ -226,7 +233,7 @@ class MisssController extends Controller
             //email to miss
 
 
-            Mail::to(Auth::user()->email)->send(new regEmailClass('missReg',$uname));
+            //Mail::to(Auth::user()->email)->send(new regEmailClass('missReg',$uname));
 
 
        //////
@@ -314,16 +321,16 @@ class MisssController extends Controller
             'service_des'=>'string|max:100|nullable',
             'special_serv'=>'string|max:100|nullable',
             'western_serv'=>'in:1|nullable',
-            'img0'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img1'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img2'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img3'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img4'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img5'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img6'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img7'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img8'=>'image|mimes:jpeg,bmp,png|size:2000|nullable',
-            'img9'=>'image|mimes:jpeg,bmp,png|size:2000|nullable'
+            'img0'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img1'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img2'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img3'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img4'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img5'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img6'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img7'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img8'=>'image|mimes:jpeg,bmp,png|size:10000|nullable',
+            'img9'=>'image|mimes:jpeg,bmp,png|size:10000|nullable'
         ]);
 
         $uname=auth()->user()->username;
@@ -353,8 +360,9 @@ class MisssController extends Controller
                     $extension = $photo->getClientOriginalExtension();
                     // Filename to store
                     $fileNameToStore[$i]= $filename.'_'.time().'.'.$extension;
+                    $img[$i]=Image::make($photo)->resize(null,300)->save(public_path().'/storage/img_name/'.$fileNameToStore[$i]);
                     // Upload Image
-                    $path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
+                    //$path = $photo->storeAs('public/img_name', $fileNameToStore[$i]);
                     //dd($path);
                     $img_column='img'.$i;
                     $miss->{$img_column}=$fileNameToStore[$i];
