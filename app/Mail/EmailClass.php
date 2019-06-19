@@ -19,11 +19,13 @@ class EmailClass extends Mailable
      *
      * @return void
      */
-    public function __construct($content,$topic,$ename)
+    public function __construct($content,$topic,$ename,$sender)
     {
         $this->content=$content;
         $this->topic=$topic;
         $this->ename=$ename;
+        $this->sender=$sender;
+
         //subject is built-in property of email class i presume
         $this->subject('99 meimei.com');
     }
@@ -35,7 +37,7 @@ class EmailClass extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email.'.$this->content)
+        return $this->markdown('email.'.$this->content)->with('sender', $this->sender)
 
                     ->with('ename', $this->ename)->with('topic', $this->topic);
     }

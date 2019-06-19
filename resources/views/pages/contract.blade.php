@@ -138,7 +138,7 @@
         @endforeach
         </div>
     @else
-        <p>对不起，没有签证条件婚约的资料。</p>
+        <p>对不起，没有移民婚约的资料。</p>
     @endif
 @endforeach
 @else

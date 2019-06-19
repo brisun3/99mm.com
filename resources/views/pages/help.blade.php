@@ -23,8 +23,8 @@
 		</div>
 
 		<div class="form-group form-inline">
-			<label for="email">Email或电话: </label>
-			<input type="text" class="form-control" id="email" value="{{$email}}" placeholder="{{$email}}" name="email" required>
+			<label for="sender">Email或电话: </label>
+			<input type="text" class="form-control" id="sender" value="{{$email}}" placeholder="{{$email}}" name="sender" required>
 		</div>
 
 		<div class="form-group">

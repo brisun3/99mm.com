@@ -3,10 +3,11 @@
 @section('content')
 <div class="container">
     
-    <h5> {{$ip_country}}</h5>
+    <h4> {{$ip_country}}</h4>
+    <hr>
     @if(count($city_num) > 0)
         @foreach($city_num as $city_name)
-            <h2>{{$city_name->city}}</h2>
+            <h5>{{$city_name->city}}</h5>
             
             @if(count($posts) > 0)
                 
